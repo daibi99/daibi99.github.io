@@ -9,7 +9,7 @@
     
     <title>
         
-            Tags |
+            Fishing Master |
         
         daibi&#39;s blog
     </title>
@@ -82,14 +82,6 @@
                             </a>
                         </li>
                     
-                        <li class="menu-item">
-                            <a class="active"
-                               href="/tags"
-                            >
-                                TAGS
-                            </a>
-                        </li>
-                    
                     
                         <li class="menu-item search search-popup-trigger">
                             <i class="fas fa-search"></i>
@@ -126,11 +118,6 @@
                        href="/categories">CATEGORIES</a>
                 </li>
             
-                <li class="drawer-menu-item flex-center">
-                    <a class="active"
-                       href="/tags">TAGS</a>
-                </li>
-            
         </ul>
     </div>
 
@@ -146,7 +133,100 @@
             <div class="main-content">
 
                 
-                    
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Fishing Master</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/1.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">daibi</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-04-07 20:02:33</span>
+        <span class="mobile">2022-04-07 20:02</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Algorithm-Practice/">Algorithm Practice</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>588 Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>3 Mins</span>
+        </span>
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>This is a question from CCPC 2019, the problem is described as follows:</p>
+<p>　　Heard that daibi is a fishing MASTER, you want to acknowledge him as your mentor. As everybody knows, if you want to be a MASTER’s apprentice, you should pass the trial. So when you find fishing MASTER daibi, the trial is as follow: There are n fish in the pool. For the i - th fish, it takes at least ti minutes to stew(overcook is acceptable). To simplify this problem, the time spent catching a fish is k minutes. You can catch fish one at a time and because there is only one pot, only one fish can be stewed in the pot at a time.  While you are catching a fish, you can not put a raw fish you have caught into the pot, that means if you begin to catch a fish, you can’t stop until after k minutes; when you are not catching fish, you can take a cooked fish (stewed for no less than ti) out of the pot or put a raw fish into the pot, these two operations take no time. Note that if the fish stewed in the pot is not stewed for enough time, you cannot take it out, but you can go to catch another fish or just wait for a while doing nothing until it is sufficiently stewed.Now daibi wants you to catch and stew all the fish as soon as possible (you definitely know that a fish can be eaten only after sufficiently stewed), so that he can have a satisfying meal. If you can complete that in the shortest possible time, daibi will accept you as his apprentice and say “I am done! I am full!”. If you can’t, daibi will not accept you and say “You are done! You are fool!”. So what’s the shortest time to pass the trial if you arrange the time optimally?</p>
+<p>Solving Idea:<br>Ideally, the time it takes res &#x3D; m + the sum of the time to cook all the fish.But in some cases, we can’t just go fishing when we cook every fish, so we need to cook some fish for more time to catch some extra fish. What we have to do is to reduce the extra fish as much as possible. time spent. When we cook the ith fish, the number of fish we can fish without spending any extra time is a[i] &#x2F; m, and the remaining time is a[i] % m, we can count whether we can fish without spending any extra time Time to catch all the fish, if not, we need to spend m - a[i] % m more time after the fish with the most time remaining is cooked.</p>
+<p>Solution:<br>#include &lt;bits&#x2F;stdc++.h&gt;<br>using namespace std;<br>typedef long long ll;<br>#define rep(i, n) for (int i &#x3D; 1; i &lt;&#x3D; n; ++i)<br>const int N &#x3D; 1E5 + 10;<br>int a[N];<br>int main()<br>{<br>    int t; cin &gt;&gt; t;<br>    while (t–) {<br>        vector<int> b;<br>        int n, m; scanf(“%d %d”, &amp;n, &amp;m);<br>        ll res &#x3D; m; int cou &#x3D; 1;<br>        rep(i, n) scanf(“%d”, &amp;a[i]), res +&#x3D; a[i], cou +&#x3D; a[i] &#x2F; m, b.push_back(a[i] % m);<br>        sort(b.begin(), b.end(), greater<int>());<br>        for (int i &#x3D; 1; i &lt;&#x3D; n - cou; ++i) res +&#x3D; m - b[i - 1];<br>        cout &lt;&lt; res &lt;&lt; endl;<br>    }<br>    return 0;<br>}</p>
+
+        </div>
+
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/04/07/Planning/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Divide-and-Conquer Monte Carlo Tree Search For Goal-Directed Planning</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
 
 
                 
@@ -175,6 +255,19 @@
         </div>
     </div>
 
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
     
 
     <div class="right-bottom-side-tools">
