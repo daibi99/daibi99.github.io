@@ -9,7 +9,7 @@
     
     <title>
         
-            Blog Introduction |
+            Data Structure－Graph |
         
         daibi&#39;s blog
     </title>
@@ -137,7 +137,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">Blog Introduction</span>
+            <span class="title-hover-animation">Data Structure－Graph</span>
         </div>
 
         
@@ -154,8 +154,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2022-04-06 12:53:48</span>
-        <span class="mobile">2022-04-06 12:53</span>
+        <span class="pc">2022-04-08 20:35:15</span>
+        <span class="mobile">2022-04-08 20:35</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -174,12 +174,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>58 Words</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.4k Words</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>1 Mins</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>4 Mins</span>
         </span>
     
     
@@ -191,7 +191,20 @@
         
 
         <div class="article-content markdown-body">
-            <p>  　　This is a blog that records my summary from reading artificial intelligence related papers and personal thoughts on related issues in this direction.<br>  if you get any trouble or questions ，Welcome to contact me .<br>  email: <a class="link"   href="mailto:&#x63;&#114;&#101;&#x73;&#99;&#101;&#x6e;&#116;&#x6d;&#111;&#x6f;&#110;&#x31;&#x32;&#51;&#64;&#x31;&#x36;&#51;&#x2e;&#99;&#111;&#x6d;" >&#x63;&#114;&#101;&#x73;&#99;&#101;&#x6e;&#116;&#x6d;&#111;&#x6f;&#110;&#x31;&#x32;&#51;&#64;&#x31;&#x36;&#51;&#x2e;&#99;&#111;&#x6d;<i class="fas fa-external-link-alt"></i></a>.</p>
+            <p>　　本文主要记录了数据结构——图相关的知识整理。</p>
+<h3 id="一、图的基本术语"><a href="#一、图的基本术语" class="headerlink" title="一、图的基本术语"></a>一、图的基本术语</h3><h4 id="图"><a href="#图" class="headerlink" title="图"></a>图</h4><p>　　图是由有限非空的顶点集合与表示顶点之间关系的的集合组成的，也就是顶点集V与边集E，我们将图G记作G &#x3D; (V , E)。另外，我们用|V|表示图的顶点数，|E|表示图的边数。</p>
+<h4 id="有向图"><a href="#有向图" class="headerlink" title="有向图"></a>有向图</h4><p>　　顶点与顶点之间的连接（弧）是有向的，一般用从一个顶点指向另一个顶点的有序对来表示弧，例如有序对&lt;v,w&gt;，其中ｖ,w是顶点，则&lt;v,w&gt;就是代表从v到w的一条弧。举个简单的例子：G &#x3D; (V,E) ;  V &#x3D; { 1,2,3 }; E &#x3D; {&lt;1,2&gt;,&lt;2,3&gt;,&lt;1,3&gt;};</p>
+<h4 id="无向图"><a href="#无向图" class="headerlink" title="无向图"></a>无向图</h4><p>　　顶点与顶点之间的连接（边）是无向的，这时我们就用无序对来表示边，例如(v,w)就表示了顶点v与顶点w之间相关联。</p>
+<h4 id="简单图"><a href="#简单图" class="headerlink" title="简单图"></a>简单图</h4><p>　　简单图需要满足两个条件，一是不能有重复的边；二是不存在顶点到自身的边。</p>
+<h4 id="完全图"><a href="#完全图" class="headerlink" title="完全图"></a>完全图</h4><p>　　完全图要求任意两个顶点之间都存在边(或者弧)。对于无向图来说，|E|的取值范围为0—n(n-1)&#x2F;2, 有n(n-1)&#x2F;2条边的无向图就称作完全图。对于有向图，|E|的取值范围为0—n(n-1), 有n(n-1)条边的有向图就称作有向完全图。</p>
+<h4 id="连通，连通图与连通分量"><a href="#连通，连通图与连通分量" class="headerlink" title="连通，连通图与连通分量"></a>连通，连通图与连通分量</h4><p>　　连通是针对无向图而言的，若无向图中顶点v到顶点w有路径存在，我们就称v和w是连通的。若无向图任意两个顶点都是连通的，我们就称无向图G为连通图。无向图中的极大连通子图被称做连通分量。也就是说，若一个无向图有n个顶点，但是它的边数小于n-1，那么此图必是非连通图。若一个无向图有n个顶点，它是非连通图，那么它最多只能有(n-1)(n-2)&#x2F;2条边。</p>
+<h4 id="强连通图，强连通分量"><a href="#强连通图，强连通分量" class="headerlink" title="强连通图，强连通分量"></a>强连通图，强连通分量</h4><p>　　强连通是针对有向图而言的，若有向图中顶点v与顶点w，顶点w与顶点v均有路径存在，则这两个顶点就是强连通的。若有向图中每一对顶点都是强连通的，则称之为强连通图。也就是说n个顶点的有向图，至少要有n-1条弧才能成为强连通图。</p>
+<h4 id="度"><a href="#度" class="headerlink" title="度"></a>度</h4><p>　　在无向图中，顶点v的度是指依附于顶点v的边的条数，也就是说无向图的全部顶点的度总和等于边数的两倍，因为每条边都与两个顶点相关联。对于有向图，度分为出度与入度，出度是指从该顶点出发指向别的顶点的弧的数量，入度则是指指向该顶点的弧的数量。也就是说，有向图每个顶点的入度之和与出度之和都等于边数e。</p>
+<h4 id="环"><a href="#环" class="headerlink" title="环"></a>环</h4><p>　　若顶点之间的路径第一个顶点与最后一个顶点相同，则称该路径为环。若一个图有n个顶点，且大于n-1条边，则该图一定有环。</p>
+<h3 id="二、图的存储"><a href="#二、图的存储" class="headerlink" title="二、图的存储"></a>二、图的存储</h3><h4 id="邻接矩阵"><a href="#邻接矩阵" class="headerlink" title="邻接矩阵"></a>邻接矩阵</h4><p>　　邻接矩阵是指用一个一维数组来存储顶点，用一个二维数组来存储顶点之间的关系。例如n个顶点的图就会构成一个A[n][n]的矩阵。若v[i]到v[j]之间有边，则A[i][j]的值就为1，否则为0。由此可知，图的邻接矩阵是唯一的，无向图的邻接矩阵是一个对称矩阵，且邻接矩阵适合存储稠密图，因为它的存储空间是由顶点个数决定的，空间复杂度为O(n^2)，若是稀疏图则没必要花费那么大的空间来存储边的关系。</p>
+<h3 id="邻接表"><a href="#邻接表" class="headerlink" title="邻接表"></a>邻接表</h3><p>　　与邻接矩阵相比，邻接表就适合存储稀疏图。我们为图的每一个顶点创建一个单链表，并将该边指向的顶点插入到该链表中，因此，无向图的邻接表空间复杂度为O(|V|+2|E|)，有向图则为O(|V|+|E|)。邻接表并不唯一，因为每个顶点对应的单链表，各个顶点的链接次序是任意的。</p>
+<h3 id="十字链表"><a href="#十字链表" class="headerlink" title="十字链表"></a>十字链表</h3><p>　　十字链表是针对有向图的链式存储结构。十字链表为有向图中每个顶点创建了一个节点，每条弧也创建了一个结点，弧结点除去信息有4个域: 尾域、头域、链域hlink指向弧头相同的下一条弧、链域tlink指向弧尾相同的下一条弧。顶点结点除去信息域还有firstin 和firtsout 两个域，分别指向以该顶点为弧头或弧尾的第一个弧结点。注意顶点之间是顺序存储的，十字链表之所以这么设计，是为了方便找到以V[i]为尾或者为头的弧，因而容易求顶点的入度和出度。十字链表不唯一，但一个十字链表表示确定一个图。</p>
+<h3 id="邻接多重表"><a href="#邻接多重表" class="headerlink" title="邻接多重表"></a>邻接多重表</h3><p>　　邻接多重表是针对无向图的链式存储结构。因其查找是否连通以及删除操作效率较低，应用极少，不做叙述。</p>
 
         </div>
 
@@ -202,21 +215,21 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2022/04/07/Monte%20Carlo%20Tree/"
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/04/07/Finshing%20Master/"
                         >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">Divide-and-Conquer Monte Carlo Tree Search For Goal-Directed Planning</span>
-                                <span class="post-nav-item">Prev posts</span>
+                                <span class="post-nav-title-item">Fishing Master</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
                             </span>
                         </a>
                     </div>
-                
                 
             </div>
         
