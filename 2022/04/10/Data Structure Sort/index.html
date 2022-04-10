@@ -23,7 +23,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/1.jpg","favicon":"/images/strawberry.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"In the Bleak Midwinter."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/1.jpg","favicon":"/images/strawberry.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"In the Bleak Midwinter."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":false},"version":"3.4.5"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
   </script>
 <!-- hexo injector head_end start -->
@@ -37,6 +37,11 @@
 <div class="progress-bar-container">
     
 
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
     
 </div>
 
@@ -196,9 +201,23 @@
 
         <div class="article-content markdown-body">
             <p>　　本文主要做了数据结构——排序的知识整理。</p>
-<h4 id="一、插入排序"><a href="#一、插入排序" class="headerlink" title="一、插入排序"></a>一、插入排序</h4><p>　　插入排序的基本思想是每次将一个待排序的记录按其大小插入到前面已排好续的子序列，直到全部记录插入完成。由此思想引申出三种插入排序算法：直接插入排序、折半插入排序和希尔排序。</p>
-<h5 id="直接插入排序"><a href="#直接插入排序" class="headerlink" title="直接插入排序"></a>直接插入排序</h5><p>　　直接插入排序是最简单也是最直观的。我们要将元素E[i]插入到已有序的子序列E[1…i-1]，首先要在E[1…i-1]中按照元素大小找到元素E[i]插入的位置k，之后将E[k…i-1]中的所有元素后移一个位置，再将E[i]插入到E[k]。下面是直接插入排序的代码：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">void InsertSort(ElemType A[], int n)         //给定n个元素的数组进行排序</span><br><span class="line">&#123;</span><br><span class="line">	int i, j;</span><br><span class="line">	for (i = 2; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		if (A[i] &lt; A[i - 1])</span><br><span class="line">		&#123;</span><br><span class="line">			A[0] = A[i];</span><br><span class="line">			for (j = i - 1; A[0] &lt; A[j]; --j)   //这里的--j是先自减，再赋值，也就是说该for循环中的j为1, 但循环结束之后, j的值为0。</span><br><span class="line">				A[j + 1] = A[j];</span><br><span class="line">			A[j + 1] = A[0];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-　　</p>
+<h4 id="一、插入排序"><a href="#一、插入排序" class="headerlink" title="一、插入排序"></a>一、插入排序</h4><p>　　插入排序的基本思想是每次将一个待排序的记录按其大小插入到前面已排好序的子序列，直到全部记录插入完成。由此思想引申出三种插入排序算法：直接插入排序、折半插入排序和希尔排序。</p>
+<h5 id="直接插入排序"><a href="#直接插入排序" class="headerlink" title="直接插入排序"></a>直接插入排序</h5><p>　　直接插入排序是最简单也是最直观的。我们要将元素E[i]插入到已有序的子序列E[1…i-1]，首先要在E[1…i-1]中按照元素大小找到元素E[i]插入的位置k，之后将E[k…i-1]中的所有元素后移一个位置，再将E[i]插入到E[k]。下面是直接插入排序的代码：</p>
+<pre><code>void InsertSort(ElemType A[], int n)         //给定n个元素的数组进行排序
+&#123;
+    int i, j;
+    for (i = 2; i &lt;= n; i++)
+    &#123;
+        if (A[i] &lt; A[i - 1])
+        &#123;
+            A[0] = A[i];
+            for (j = i - 1; A[0] &lt; A[j]; --j)   //这里的--j是先自减，再赋值，也就是说该for循环中的j为1, 但循环结束之后, j的值为0。
+                A[j + 1] = A[j];
+            A[j + 1] = A[0];
+        &#125;
+    &#125;
+&#125;
+</code></pre><p>　　</p>
 
         </div>
 
@@ -393,7 +412,7 @@
 
 
 
-<div class="post-scripts">
+<div class="post-scripts pjax">
     
         
 <script src="/js/left-side-toggle.js"></script>
@@ -404,6 +423,40 @@
 
     
 </div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
 
 
 

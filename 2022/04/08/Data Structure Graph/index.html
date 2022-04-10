@@ -23,7 +23,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/1.jpg","favicon":"/images/strawberry.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"In the Bleak Midwinter."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/1.jpg","favicon":"/images/strawberry.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"In the Bleak Midwinter."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":false},"version":"3.4.5"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
   </script>
 <!-- hexo injector head_end start -->
@@ -37,6 +37,11 @@
 <div class="progress-bar-container">
     
 
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
     
 </div>
 
@@ -209,11 +214,121 @@
 <h5 id="邻接表"><a href="#邻接表" class="headerlink" title="邻接表"></a>邻接表</h5><p>　　与邻接矩阵相比，邻接表就适合存储稀疏图。我们为图的每一个顶点创建一个单链表，并将该边指向的顶点插入到该链表中，因此，无向图的邻接表空间复杂度为O(|V|+2|E|)，有向图则为O(|V|+|E|)。邻接表并不唯一，因为每个顶点对应的单链表，各个顶点的链接次序是任意的。</p>
 <h5 id="十字链表"><a href="#十字链表" class="headerlink" title="十字链表"></a>十字链表</h5><p>　　十字链表是针对有向图的链式存储结构。十字链表为有向图中每个顶点创建了一个节点，每条弧也创建了一个结点，弧结点除去信息有4个域: 尾域、头域、链域hlink指向弧头相同的下一条弧、链域tlink指向弧尾相同的下一条弧。顶点结点除去信息域还有firstin 和firtsout 两个域，分别指向以该顶点为弧头或弧尾的第一个弧结点。注意顶点之间是顺序存储的，十字链表之所以这么设计，是为了方便找到以V[i]为尾或者为头的弧，因而容易求顶点的入度和出度。十字链表不唯一，但一个十字链表表示确定一个图。</p>
 <h5 id="邻接多重表"><a href="#邻接多重表" class="headerlink" title="邻接多重表"></a>邻接多重表</h5><p>　　邻接多重表是针对无向图的链式存储结构。因其查找顶点间是否连通以及删除操作效率较低，应用极少，不做叙述。</p>
-<h4 id="三、图的遍历"><a href="#三、图的遍历" class="headerlink" title="三、图的遍历"></a>三、图的遍历</h4><h5 id="Breadth-First-Search-BFS"><a href="#Breadth-First-Search-BFS" class="headerlink" title="Breadth-First-Search(BFS)"></a>Breadth-First-Search(BFS)</h5><p>　　广度优先算法（BFS）算法的基本思想是，从给定顶点v开始，依次访问v的（还未被访问过的）邻接顶点w1、w2、w3…，然后从w1、w2、w3开始，重复上述的过程，直到所有的顶点都被访问，因此该算法需要借助一个辅助队列来记录正在访问顶点的下一层顶点。需要注意的是，每个顶点只能被访问一次。BFS在数据结构中可以用在Dijkstra单源最短路径算法和Prim最小生成树算法。BFS伪代码如下：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">bool visited[Max_v];      //标记访问数组</span><br><span class="line">void BFSTraversre(Graph G)</span><br><span class="line">&#123;</span><br><span class="line">	for（i = 0; i &lt; G.vexnum; i++)</span><br><span class="line">	     visited[i] = false;          //初始化访问数组</span><br><span class="line">	InitQueue(Q);            </span><br><span class="line">	for (i = 0; i &lt; G.vexnum; i++)</span><br><span class="line">		if (!vsisted[i])</span><br><span class="line">			BFS(G, i);      //若顶点未被访问过，则对其进行BFS</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void BFS(Graph G, int v)</span><br><span class="line">&#123;</span><br><span class="line">	visit(v);</span><br><span class="line">	visited[v] = true;             //标记为已访问 </span><br><span class="line">	Enqueue(Q, V);                //v进队</span><br><span class="line">	while (!isEmpty(Q))</span><br><span class="line">	&#123;</span><br><span class="line">		DeQueue(Q, v);</span><br><span class="line">		for (w = FirstNeighbor(G, v); w &gt;= 0; w = NextNeighbor(G, v, w)    //v的邻接顶点入队</span><br><span class="line">		&#123;</span><br><span class="line">			if(!visited[w])</span><br><span class="line">				visit[w];</span><br><span class="line">				visited[w]=TRUE;</span><br><span class="line">				EnQueue(Q,w);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>　　BFS算法需要借助辅助队列，而且每个顶点都需要入队一次，所以空间复杂度是O(|V|)。当图采用邻接表存储时，每个顶点需要被访问一次，而访问该顶点的邻接顶点只需要对单链表进行操作，因此时间复杂度为O(|V|+|E|)。当图采用邻接矩阵存储时，查找每个顶点的邻接顶点所需时间为O(|V|)，所以总时间复杂度为O(|V^2|)。</p>
-<h5 id="Depth-First-Search-DFS"><a href="#Depth-First-Search-DFS" class="headerlink" title="Depth-First-Search(DFS)"></a>Depth-First-Search(DFS)</h5><p>　　深度优先算法（DFS）的基本思想是，从给定顶点v出发，访问与v邻接的且未被访问过的顶点w，再从w出发，访问与w邻接且未被访问过的顶点w1，重复此过程，当不能再往下访问时，依次退回到最近被访问的顶点，若他还有邻接顶点未被访问过，则从该点开始继续上述过程，直到所有顶点被访问。因此，DFS算法需要借助递归工作栈来返回最近被访问顶点的值。DFS伪代码如下：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">bool visited[Max_v];      //标记访问数组</span><br><span class="line">void DFSTraversre(Graph G)</span><br><span class="line">&#123;</span><br><span class="line">	for（i = 0; i &lt; G.vexnum; i++)</span><br><span class="line">	visited[i] = false;          //初始化访问数组</span><br><span class="line">	for (i = 0; i &lt; G.vexnum; i++)</span><br><span class="line">		if (!vsisted[i])</span><br><span class="line">			DFS(G, i);      //若顶点未被访问过，则对其进行DFS</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void DFS(Graph G, int v)</span><br><span class="line">&#123;</span><br><span class="line">	visit(v);</span><br><span class="line">	visited[v] = TRUE;</span><br><span class="line">	for(w=FirstNeighbor(G,v);w&gt;=0;w=NextNeighbor(G,v,w))</span><br><span class="line">		if (!visited[w]) &#123;</span><br><span class="line">			DFS(G, w)</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>　　DFS算法需要用到递归工作栈，因此空间复杂度为O(|V|)。当图用邻接表存储时，查找所有顶点需要O(|V|+|E|)。当图用邻接矩阵存储时，每个顶点和其邻接结点的查找都需要O(|V|)，故总时间复杂度为O(|V^2|。</p>
-<h4 id="四、遍历算法的应用及拓展"><a href="#四、遍历算法的应用及拓展" class="headerlink" title="四、遍历算法的应用及拓展"></a>四、遍历算法的应用及拓展</h4><h5 id="连通性和路径查找"><a href="#连通性和路径查找" class="headerlink" title="连通性和路径查找"></a>连通性和路径查找</h5><p>　　遍历算法可以判断图的连通性。例如对于一个无向图，若图是连通的，则从任意顶点出发，仅需一次遍历就可以访问所有的结点。若图非连通，则只能访问到该图的连通分量的结点。<br>　　上文中DFS算法使用了递归，那么非递归的DFS应该怎么设计呢？首先我们需要一个栈，用来存储访问过的结点信息，因为当我们不能再往下访问时，需要回退到最近访问的结点，这个特性刚好可以用栈来实现，我们在访问一个顶点时，要把它放进栈中，当栈非空时，将其取出，再将其邻接的结点放进去，重复上述过程。DFS非递归代码如下：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">bool visited[Max_v]; </span><br><span class="line">void DFSTraversre(Graph G)</span><br><span class="line">&#123;</span><br><span class="line">	for（i = 0; i &lt; G.vexnum; i++)</span><br><span class="line">	          visited[i] = false;  </span><br><span class="line">	InitStack(S);</span><br><span class="line">	for (i = 0; i &lt; G.vexnum; i++)</span><br><span class="line">		if (!vsisted[i])</span><br><span class="line">			DFS(G, i); </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void DFS(Graph G, int v)</span><br><span class="line">&#123;</span><br><span class="line">	Push(S, v);</span><br><span class="line">	visited[v] = true;</span><br><span class="line">	while (!isEmpty(S))</span><br><span class="line">		a = Pop(S);</span><br><span class="line">	        visit[a];</span><br><span class="line">		for (w = NextNeighbor(G, a); w &gt;= 0; w = NextNeighbor(G, a, w)) &#123;</span><br><span class="line">			if (!visited[w])</span><br><span class="line">				Push(S, w);</span><br><span class="line">			        visited[w] = true;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>　　遍历算法还可以应用到查找有向图中是否存在顶点v到顶点w的路径。下面分别用BFS与DFS算法演示：</p>
-<p>　　BFS:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">int BFS(Graph G, int v, int w)</span><br><span class="line">&#123;</span><br><span class="line">	InitQueue(Q);</span><br><span class="line">	Enqueue(Q, v);</span><br><span class="line">	while (!isEmpty(Q))</span><br><span class="line">		Dequeue(Q, u);            //u为队头元素</span><br><span class="line">	        visited[u] = true;</span><br><span class="line">		if (u == w)</span><br><span class="line">			return 1;</span><br><span class="line">		for (p = NextNeighbor(G, u); p &gt;= 0; p = NextNeighbor(G, u, p))</span><br><span class="line">		&#123;</span><br><span class="line">			if (p == w)         //p=w查找成功，返回1</span><br><span class="line">				return 1;</span><br><span class="line">			if (!visited[p])    //否则入队</span><br><span class="line">				EnQueue(Q, p);</span><br><span class="line">			        visited[p] = 1;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>　　DFS:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">void DFS(Graph G, int v, int w, bool reach)</span><br><span class="line">&#123;</span><br><span class="line">	if (v == w) </span><br><span class="line">	&#123;</span><br><span class="line">		reach = true;</span><br><span class="line">		return;</span><br><span class="line">	&#125;</span><br><span class="line">	visit[v] = true;</span><br><span class="line">	for (i = NextNeighbor(G, v); i &gt;= 0; i = NextNeighbor(G, v, i)) </span><br><span class="line">	&#123;</span><br><span class="line">		if (i == w) &#123;</span><br><span class="line">			reach = true;</span><br><span class="line">			return;</span><br><span class="line">		&#125;</span><br><span class="line">		DFS(G, i, w, reach);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h5 id="Prim-Kruskal最小生成树算法"><a href="#Prim-Kruskal最小生成树算法" class="headerlink" title="Prim/Kruskal最小生成树算法"></a>Prim/Kruskal最小生成树算法</h5><p>　　最小生成树是指包含该图所有顶点并且有着尽可能少的边的树。也就是说对于一个生成树，它的边数等于顶点数减一，如果去掉它的一条边，它会变成非连通图，增加一条边，它就形成一条回路。Prim算法与Kruskal算法都是基于贪心算法的策略。<br>　　Prim算法的基本思想：创建一个空树，选取一个顶点归入树，这时树中就只有一个顶点，然后选取其邻接顶点中与之相连的边权值最小的顶点并入树T，这时T有两个顶点，这时再从其余顶点中选取与该T相连的权值最小的顶点归并到T中，直到所有顶点都在T中。因为每个顶点都至少需要访问与之相连权值最小顶点的顶点一次，故Prim算法的时间复杂度为O(|V^2|)，因此Prim算法更适合边稠密的图。<br>　　Kruskal算法的基本思想：初始状态，将一个图视为只有顶点没有边的独立的连通分量，然后按照边的权值从小到大的排序，不断选择未被选取过且权值最小的边，若该边依附的顶点落在T中不同的连通分量上，则将此边加入T，否则舍弃继续寻找下一条权值最小的边，直到所有顶点都在T中。该算法最大的开销在于边权值的排序，一般我们使用堆排序来解决，时间复杂度为O(|E|log2|E|)，因此Kruskal适合顶点多而边稀疏的图。</p>
+<h4 id="三、图的遍历"><a href="#三、图的遍历" class="headerlink" title="三、图的遍历"></a>三、图的遍历</h4><h5 id="Breadth-First-Search-BFS"><a href="#Breadth-First-Search-BFS" class="headerlink" title="Breadth-First-Search(BFS)"></a>Breadth-First-Search(BFS)</h5><p>　　广度优先算法（BFS）算法的基本思想是，从给定顶点v开始，依次访问v的（还未被访问过的）邻接顶点w1、w2、w3…，然后从w1、w2、w3开始，重复上述的过程，直到所有的顶点都被访问，因此该算法需要借助一个辅助队列来记录正在访问顶点的下一层顶点。需要注意的是，每个顶点只能被访问一次。BFS在数据结构中可以用在Dijkstra单源最短路径算法和Prim最小生成树算法。BFS伪代码如下：</p>
+<pre><code>bool visited[Max_v];      //标记访问数组
+void BFSTraversre(Graph G)
+&#123;
+    for（i = 0; i &lt; G.vexnum; i++)
+         visited[i] = false;          //初始化访问数组
+    InitQueue(Q);            
+    for (i = 0; i &lt; G.vexnum; i++)
+        if (!vsisted[i])
+            BFS(G, i);      //若顶点未被访问过，则对其进行BFS
+&#125;
+
+void BFS(Graph G, int v)
+&#123;
+    visit(v);
+    visited[v] = true;             //标记为已访问 
+    Enqueue(Q, V);                //v进队
+    while (!isEmpty(Q))
+    &#123;
+        DeQueue(Q, v);
+        for (w = FirstNeighbor(G, v); w &gt;= 0; w = NextNeighbor(G, v, w)    //v的邻接顶点入队
+        &#123;
+            if(!visited[w])
+                visit[w];
+                visited[w]=TRUE;
+                EnQueue(Q,w);
+        &#125;
+    &#125;
+&#125;
+</code></pre><p>　　BFS算法需要借助辅助队列，而且每个顶点都需要入队一次，所以空间复杂度是O(|V|)。当图采用邻接表存储时，每个顶点需要被访问一次，而访问该顶点的邻接顶点只需要对单链表进行操作，因此时间复杂度为O(|V|+|E|)。当图采用邻接矩阵存储时，查找每个顶点的邻接顶点所需时间为O(|V|)，所以总时间复杂度为O(|V^2|)。</p>
+<h5 id="Depth-First-Search-DFS"><a href="#Depth-First-Search-DFS" class="headerlink" title="Depth-First-Search(DFS)"></a>Depth-First-Search(DFS)</h5><p>　　深度优先算法（DFS）的基本思想是，从给定顶点v出发，访问与v邻接的且未被访问过的顶点w，再从w出发，访问与w邻接且未被访问过的顶点w1，重复此过程，当不能再往下访问时，依次退回到最近被访问的顶点，若他还有邻接顶点未被访问过，则从该点开始继续上述过程，直到所有顶点被访问。因此，DFS算法需要借助递归工作栈来返回最近被访问顶点的值。DFS伪代码如下：</p>
+<pre><code>bool visited[Max_v];      //标记访问数组
+void DFSTraversre(Graph G)
+&#123;
+    for（i = 0; i &lt; G.vexnum; i++)
+    visited[i] = false;          //初始化访问数组
+    for (i = 0; i &lt; G.vexnum; i++)
+        if (!vsisted[i])
+            DFS(G, i);      //若顶点未被访问过，则对其进行DFS
+&#125;
+
+void DFS(Graph G, int v)
+&#123;
+    visit(v);
+    visited[v] = TRUE;
+    for(w=FirstNeighbor(G,v);w&gt;=0;w=NextNeighbor(G,v,w))
+        if (!visited[w]) &#123;
+            DFS(G, w)
+        &#125;
+&#125;
+</code></pre><p>　　DFS算法需要用到递归工作栈，因此空间复杂度为O(|V|)。当图用邻接表存储时，查找所有顶点需要O(|V|+|E|)。当图用邻接矩阵存储时，每个顶点和其邻接结点的查找都需要O(|V|)，故总时间复杂度为O(|V^2|。</p>
+<h4 id="四、遍历算法的应用及拓展"><a href="#四、遍历算法的应用及拓展" class="headerlink" title="四、遍历算法的应用及拓展"></a>四、遍历算法的应用及拓展</h4><h5 id="连通性和路径查找"><a href="#连通性和路径查找" class="headerlink" title="连通性和路径查找"></a>连通性和路径查找</h5><p>　　遍历算法可以判断图的连通性。例如对于一个无向图，若图是连通的，则从任意顶点出发，仅需一次遍历就可以访问所有的结点。若图非连通，则只能访问到该图的连通分量的结点。<br>　　上文中DFS算法使用了递归，那么非递归的DFS应该怎么设计呢？首先我们需要一个栈，用来存储访问过的结点信息，因为当我们不能再往下访问时，需要回退到最近访问的结点，这个特性刚好可以用栈来实现，我们在访问一个顶点时，要把它放进栈中，当栈非空时，将其取出，再将其邻接的结点放进去，重复上述过程。DFS非递归代码如下：</p>
+<pre><code>bool visited[Max_v]; 
+void DFSTraversre(Graph G)
+&#123;
+    for（i = 0; i &lt; G.vexnum; i++)
+              visited[i] = false;  
+    InitStack(S);
+    for (i = 0; i &lt; G.vexnum; i++)
+        if (!vsisted[i])
+            DFS(G, i); 
+&#125;
+
+void DFS(Graph G, int v)
+&#123;
+    Push(S, v);
+    visited[v] = true;
+    while (!isEmpty(S))
+        a = Pop(S);
+            visit[a];
+        for (w = NextNeighbor(G, a); w &gt;= 0; w = NextNeighbor(G, a, w)) &#123;
+            if (!visited[w])
+                Push(S, w);
+                    visited[w] = true;
+        &#125;
+&#125;
+</code></pre><p>　　遍历算法还可以应用到查找有向图中是否存在顶点v到顶点w的路径。下面分别用BFS与DFS算法演示：</p>
+<p>　　BFS:</p>
+<pre><code>int BFS(Graph G, int v, int w)
+&#123;
+    InitQueue(Q);
+    Enqueue(Q, v);
+    while (!isEmpty(Q))
+        Dequeue(Q, u);            //u为队头元素
+            visited[u] = true;
+        if (u == w)
+            return 1;
+        for (p = NextNeighbor(G, u); p &gt;= 0; p = NextNeighbor(G, u, p))
+        &#123;
+            if (p == w)         //p=w查找成功，返回1
+                return 1;
+            if (!visited[p])    //否则入队
+                EnQueue(Q, p);
+                    visited[p] = 1;
+        &#125;
+&#125;
+</code></pre><p>　　DFS:</p>
+<pre><code>void DFS(Graph G, int v, int w, bool reach)
+&#123;
+    if (v == w) 
+    &#123;
+        reach = true;
+        return;
+    &#125;
+    visit[v] = true;
+    for (i = NextNeighbor(G, v); i &gt;= 0; i = NextNeighbor(G, v, i)) 
+    &#123;
+        if (i == w) &#123;
+            reach = true;
+            return;
+        &#125;
+        DFS(G, i, w, reach);
+    &#125;
+&#125;
+</code></pre><h5 id="Prim-Kruskal最小生成树算法"><a href="#Prim-Kruskal最小生成树算法" class="headerlink" title="Prim/Kruskal最小生成树算法"></a>Prim/Kruskal最小生成树算法</h5><p>　　最小生成树是指包含该图所有顶点并且有着尽可能少的边的树。也就是说对于一个生成树，它的边数等于顶点数减一，如果去掉它的一条边，它会变成非连通图，增加一条边，它就形成一条回路。Prim算法与Kruskal算法都是基于贪心算法的策略。<br>　　Prim算法的基本思想：创建一个空树，选取一个顶点归入树，这时树中就只有一个顶点，然后选取其邻接顶点中与之相连的边权值最小的顶点并入树T，这时T有两个顶点，这时再从其余顶点中选取与该T相连的权值最小的顶点归并到T中，直到所有顶点都在T中。因为每个顶点都至少需要访问与之相连权值最小顶点的顶点一次，故Prim算法的时间复杂度为O(|V^2|)，因此Prim算法更适合边稠密的图。<br>　　Kruskal算法的基本思想：初始状态，将一个图视为只有顶点没有边的独立的连通分量，然后按照边的权值从小到大的排序，不断选择未被选取过且权值最小的边，若该边依附的顶点落在T中不同的连通分量上，则将此边加入T，否则舍弃继续寻找下一条权值最小的边，直到所有顶点都在T中。该算法最大的开销在于边权值的排序，一般我们使用堆排序来解决，时间复杂度为O(|E|log2|E|)，因此Kruskal适合顶点多而边稀疏的图。</p>
 <h5 id="Dijkstra单源最短路径算法"><a href="#Dijkstra单源最短路径算法" class="headerlink" title="Dijkstra单源最短路径算法"></a>Dijkstra单源最短路径算法</h5><p>　　之前介绍遍历的应用中可以查找路径，但那是对于无权图而言，而对于带权图（边有权值，可以想象为距离），我们常常需要寻找带权路径长度最短的那一条路径，并称之为最短路径。<br>　　算法思想：Dijkstra算法设置一个集合来记录已求得最短路径的顶点，初始时把源点v0放入S，每次并入一个新顶点vi时，都要修改源点v0到集合S中其余顶点的当前最短路径值。这里设置了两个辅助数组dist[]和path[]，dist[]用来记录v0到其他顶点的当前最短路径长度，初态，若源点v0到vi有弧，则dist[i]为弧的权值，否则dist[i]为无穷大。path[i]用来记录原点到顶点i之间的最短路径的前驱结点，算法结束后可以追溯到v0到vi的最短路径。<br>　　初始化集合S为{0}，dist[i]=arcs[0][i]，下一步，我们要选出满足dist[j]=Min{dist[i]}的顶点J，也就是选出与v0相连的所有顶点中，带权路径长度最短的那一条，并将其并入集合S，另外，还要修改v0到S（顶点vj并入之后）内其余顶点的路径长度。重复此过程，直到所有顶点并入S。该算法不适用于有权值为负的边，其时间复杂度为O(|V^2|)。</p>
 <h5 id="Floyd多源最短路径算法"><a href="#Floyd多源最短路径算法" class="headerlink" title="Floyd多源最短路径算法"></a>Floyd多源最短路径算法</h5><p>　　算法思想：Floyd算法递推产生一个n阶方阵序列从A^-1，A^0…A^n-1,其中方阵A用来记录顶点之间的路径长度，而上标k=-1，0，n-1指的是顶点之间绕行k个顶点的路径长度。也就是说，在初始状态，若顶点之间有路径，则在方阵中记录路径长度，若无路径，则记录无穷大，之后再来探究顶点之间若是绕行另一个顶点，会不会有路径或者原本的路径减小，此时就要在方阵中进行更新。Floyd算法的时间复杂度为O(|V^3|)。其实用Dijkstra算法轮流将每个顶点作为源点，并在所有边权值为负时运行一次，也可以解决每对顶点之间的最短路径问题。</p>
 <h5 id="拓扑排序"><a href="#拓扑排序" class="headerlink" title="拓扑排序"></a>拓扑排序</h5><p>　　当图用来代表工程活动，顶点表示活动，我们用有向边<vi，vj>代表vi必须先于vj活动的关系，并将这种图记为AOV网。我们构建拓扑排序的步骤一般是：首先从AOV网选择一个没有前驱的顶点并输出，然后从网中删除该顶点以及以它为起点的有向边，重复上述步骤直到当前AOV网为空。</p>
@@ -427,7 +542,7 @@
 
 
 
-<div class="post-scripts">
+<div class="post-scripts pjax">
     
         
 <script src="/js/left-side-toggle.js"></script>
@@ -438,6 +553,40 @@
 
     
 </div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
 
 
 
