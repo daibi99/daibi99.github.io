@@ -293,12 +293,12 @@ mjx-container[display="true"] + br {
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>603 Words</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.5k Words</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>2 Mins</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>5 Mins</span>
         </span>
     
     
@@ -328,7 +328,62 @@ mjx-container[display="true"] + br {
     }
 }
 </code></pre><p>　　性能分析：直接插入排序使用了常数个辅助单元，所以空间复杂度为O(1)。最好情况下，给定的元素本就是有序的，因此在排序过程中只需要比较元素而不用移动元素，因此时间复杂度为O(n)。最坏情况下，给定的元素为逆序，每次插入不仅需要比较次数最大，而且需要移动的次数也是最大的，平均情况下，取最好与最坏情况的平均值为<script type="math/tex">n^2/4</script>。因此直接插入排序算法的时间复杂的是<script type="math/tex">O(n^2)</script>。由于每次插入元素时总是向前比较再移动，所以不会出现相同元素相对位置改变的情况，因此直接插入排序是一个稳定的排序方法。</p>
-<h5 id="折半插入排序"><a href="#折半插入排序" class="headerlink" title="折半插入排序"></a>折半插入排序</h5><p>　　折半插入排序与直接插入排序不同的地方在于，直接插入排序是边比较边移动元素，而折半插入排序是先折半查找出元素的待插入位置，然后统一地移动待插入位置之后的所有元素。</p>
+<h5 id="折半插入排序"><a href="#折半插入排序" class="headerlink" title="折半插入排序"></a>折半插入排序</h5><p>　　折半插入排序与直接插入排序不同的地方在于，直接插入排序是边比较边移动元素，而折半插入排序是先折半查找出元素的待插入位置，然后统一地移动待插入位置之后的所有元素。在对于顺序存储的线性表，所以查找有序子表时可以用折半查找来实现。下面是折半插入排序的代码：</p>
+<pre><code>void InsertSort(ElemType A[], int n) {
+    int i, j, high, low, mid;
+    for (i = 2; i &lt;= n; i++)
+    {
+        A[0] = A[i];
+        low = 1, high = i - 1;
+        while (low &lt;= high)
+        {
+            mid = (low + high) / 2;
+            if (A[mid] &gt; A[0])
+            {
+                high = mid - 1;
+            }
+            else low = mid + 1;
+        }
+        for (j = i - 1; j &gt;= high + 1; --j)
+        {
+            A[j + 1] = A[j];
+        }
+        A[high + 1] = A[0];
+    }
+}
+</code></pre><p>　　性能分析：折半插入排序只减少了元素比较的次数，约为<script type="math/tex">O(n\log_2 n)</script>，但是移动次数并未改变，因此折半插入排序的时间复杂的仍为<script type="math/tex">O(n^2)</script>。在数据量不是很大的排序表，折半查找能够表现出很好的性能，并且它是稳定的排序方法。</p>
+<h5 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h5><p>　　从直接排序的算法分析可以得知，当直接排序算法给定的序列有序且为正序时，时间复杂度可以提升到O(n)，也就是说基本有序的排序表和数据量不大的排序表用直接插入排序效率更高。希尔排序基于这个思路，把待排序表分割成若干个形如L[i,i+d,i+2d…i+kd]的子表，d为增量，对每个子表进行直接插入排序，当整个表中的元素已经基本有序时，再对全体记录进行一次直接插入排序。</p>
+<pre><code>void ShellSort(ElemTyepe A[], int n)
+{
+    for (dk = n / 2; dk &gt;= 1; dk = dk / 2)
+        for (i = dk + 1; i &lt;= n; ++i)
+            if (A[i] &lt; A[i - dk]) {
+                A[0] = A[i];
+                for (j = i - dk; j &gt; 0 &amp;&amp; A[0] &lt; A[j]; j -= dk)
+                    A[j + dk] = A[j];
+                A[j + dk] = A[0];
+            }
+}
+</code></pre><p>　　性能分析：希尔排序只用了常数个辅助单元，空间复杂度为O(1)。它的时间复杂度依赖于增量序列的函数，这是数学上的问题，分析较为困难，最坏的时间复杂度为<script type="math/tex">O(n^2)</script>。当相同关键字被划分到不同子表的时候，可能会改变相对次序，因此希尔排序是不稳定的算法。</p>
+<h4 id="二、交换排序"><a href="#二、交换排序" class="headerlink" title="二、交换排序"></a>二、交换排序</h4><p>　　交换排序的意思是根据序列中两个元素的关键字的比较结果来交换这两个元素在序列中的位置，这里主要介绍冒泡排序算法和快速排序算法。</p>
+<h5 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h5><p>　　冒泡排序的基本思想是，从后往前（或是从前往后），比较两两元素的值，若是逆序，则交换两元素位置，直到序列比较完成，该过程就很像第一趟排序把最小的元素从后面“浮上来”，然后不再参与比较，第二趟就继续把最小的浮上来，重复此过程。冒泡排序的代码如下：</p>
+<pre><code>void BubbleSort(ElemType A[], int n)
+{
+    for (int i = 0; i &lt; n - 1; i++)
+    {
+        flag = false;
+        if (int j = n - 1; j &lt; i; j--)
+        {
+            if (A[j - 1] &gt; A[j])
+                swap(A[j - 1], A[j]);    //temp交换
+                flag = true;
+        }
+        if (falg == false)         //没有交换，则代表表已经有序
+            return;      
+    }
+}
+</code></pre><p>　　性能分析：空间复杂度为O(1)。最好情况是原本有序，比较次数为n-1次，时间复杂度为O(n)，最坏情况为逆序，时间复杂度为<script type="math/tex">O(n^2)</script>。当i&gt;j且A[i]=A[j]时，元素不会发生交换，所以相对位置不会改变，因此冒泡排序是稳定的算法。
+　　</p>
 
         </div>
 
@@ -455,7 +510,7 @@ mjx-container[display="true"] + br {
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="nav-text">一、插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="nav-text">直接插入排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8A%98%E5%8D%8A%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="nav-text">折半插入排序</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="nav-text">一、插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="nav-text">直接插入排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8A%98%E5%8D%8A%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="nav-text">折半插入排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F"><span class="nav-text">希尔排序</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BA%A4%E6%8D%A2%E6%8E%92%E5%BA%8F"><span class="nav-text">二、交换排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F"><span class="nav-text">冒泡排序</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>
