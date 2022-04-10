@@ -9,7 +9,7 @@
     
     <title>
         
-            Data structure - Tree |
+            Data structure - Sort |
         
         daibi&#39;s blog
     </title>
@@ -141,7 +141,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">Data structure - Tree</span>
+            <span class="title-hover-animation">Data structure - Sort</span>
         </div>
 
         
@@ -178,7 +178,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>16 Words</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>306 Words</span>
         </span>
     
     
@@ -195,7 +195,10 @@
         
 
         <div class="article-content markdown-body">
-            <p>　　本文主要做了数据结构——树的知识整理。</p>
+            <p>　　本文主要做了数据结构——排序的知识整理。</p>
+<h4 id="一、插入排序"><a href="#一、插入排序" class="headerlink" title="一、插入排序"></a>一、插入排序</h4><p>　　插入排序的基本思想是每次将一个待排序的记录按其大小插入到前面已排好续的子序列，直到全部记录插入完成。由此思想引申出三种插入排序算法：直接插入排序、折半插入排序和希尔排序。</p>
+<h5 id="直接插入排序"><a href="#直接插入排序" class="headerlink" title="直接插入排序"></a>直接插入排序</h5><p>　　直接插入排序是最简单也是最直观的。我们要将元素E[i]插入到已有序的子序列E[1…i-1]，首先要在E[1…i-1]中按照元素大小找到元素E[i]插入的位置k，之后将E[k…i-1]中的所有元素后移一个位置，再将E[i]插入到E[k]。下面是直接插入排序的代码：<br>```<br>void InsertSort(ElemType A[], int n)         //给定n个元素的数组进行排序<br>{<br>    int i, j;<br>    for (i = 2; i &lt;= n; i++)<br>    {<br>        if (A[i] &lt; A[i - 1])<br>        {<br>            A[0] = A[i];<br>            for (j = i - 1; A[0] &lt; A[j]; —j)   //这里的—j是先自减，再赋值，也就是说该for循环中的j为1, 但循环结束之后, j的值为0。<br>                A[j + 1] = A[j];<br>            A[j + 1] = A[0];<br>        }<br>    }<br>}
+　　</p>
 
         </div>
 
@@ -322,7 +325,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        
+        <ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="nav-text">一、插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="nav-text">直接插入排序</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>
