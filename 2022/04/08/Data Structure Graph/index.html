@@ -28,7 +28,119 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
 
 
 <body>
@@ -186,7 +298,7 @@
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>15 Mins</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>14 Mins</span>
         </span>
     
     
@@ -200,7 +312,7 @@
         <div class="article-content markdown-body">
             <p>　　本文主要做了数据结构——图相关的知识整理。</p>
 <h4 id="一、图的基本术语"><a href="#一、图的基本术语" class="headerlink" title="一、图的基本术语"></a>一、图的基本术语</h4><h5 id="图"><a href="#图" class="headerlink" title="图"></a>图</h5><p>　　图是由有限非空的顶点集合与表示顶点之间关系的集合组成的，也就是顶点集V与边集E，我们将图G记作G = (V , E)。另外，我们用|V|表示图的顶点数，|E|表示图的边数。</p>
-<h5 id="有向图"><a href="#有向图" class="headerlink" title="有向图"></a>有向图</h5><p>　　顶点与顶点之间的连接（弧）是有向的，一般用从一个顶点指向另一个顶点的有序对来表示弧，例如有序对<v,w>，其中ｖ,w是顶点，则<v,w>就是代表从v到w的一条弧。举个简单的例子：G = (V,E) ;  V = { 1,2,3 }; E = {<1,2>,<2,3>,<1,3>};</p>
+<h5 id="有向图"><a href="#有向图" class="headerlink" title="有向图"></a>有向图</h5><p>　　顶点与顶点之间的连接（弧）是有向的，一般用从一个顶点指向另一个顶点的有序对来表示弧，例如有序对<v,w>，其中ｖ,w是顶点，则<v,w>就是代表从v到w的一条弧。举个简单的例子：G = (V,E) ;  V = { 1,2,3 }; E = {&lt;1,2&gt;,&lt;2,3&gt;,&lt;1,3&gt;};</v,w></v,w></p>
 <h5 id="无向图"><a href="#无向图" class="headerlink" title="无向图"></a>无向图</h5><p>　　顶点与顶点之间的连接（边）是无向的，这时我们就用无序对来表示边，例如(v,w)就表示了顶点v与顶点w之间相关联。</p>
 <h5 id="简单图"><a href="#简单图" class="headerlink" title="简单图"></a>简单图</h5><p>　　简单图需要满足两个条件，一是不能有重复的边；二是不存在顶点到自身的边。</p>
 <h5 id="完全图"><a href="#完全图" class="headerlink" title="完全图"></a>完全图</h5><p>　　完全图要求任意两个顶点之间都存在边(或者弧)。对于无向图来说，|E|的取值范围为0—n(n-1)/2, 有n(n-1)/2条边的无向图就称作完全图。对于有向图，|E|的取值范围为0—n(n-1), 有n(n-1)条边的有向图就称作有向完全图。</p>
@@ -208,90 +320,90 @@
 <h5 id="强连通图，强连通分量"><a href="#强连通图，强连通分量" class="headerlink" title="强连通图，强连通分量"></a>强连通图，强连通分量</h5><p>　　强连通是针对有向图而言的，若有向图中顶点v与顶点w，顶点w与顶点v均有路径存在，则这两个顶点就是强连通的。若有向图中每一对顶点都是强连通的，则称之为强连通图。也就是说n个顶点的有向图，至少要有n-1条弧才能成为强连通图。</p>
 <h5 id="度"><a href="#度" class="headerlink" title="度"></a>度</h5><p>　　在无向图中，顶点v的度是指依附于顶点v的边的条数，也就是说无向图的全部顶点的度总和等于边数的两倍，因为每条边都与两个顶点相关联。对于有向图，度分为出度与入度，出度是指从该顶点出发指向别的顶点的弧的数量，入度则是指指向该顶点的弧的数量。也就是说，有向图每个顶点的入度之和与出度之和都等于边数e。</p>
 <h5 id="环"><a href="#环" class="headerlink" title="环"></a>环</h5><p>　　若顶点之间的路径第一个顶点与最后一个顶点相同，则称该路径为环。若一个图有n个顶点，且大于n-1条边，则该图一定有环。</p>
-<h4 id="二、图的存储"><a href="#二、图的存储" class="headerlink" title="二、图的存储"></a>二、图的存储</h4><h5 id="邻接矩阵"><a href="#邻接矩阵" class="headerlink" title="邻接矩阵"></a>邻接矩阵</h5><p>　　邻接矩阵是指用一个一维数组来存储顶点，用一个二维数组来存储顶点之间的关系。例如n个顶点的图就会构成一个A[n][n]的矩阵。若v[i]到v[j]之间有边，则A[i][j]的值就为1，否则为0。由此可知，图的邻接矩阵是唯一的，无向图的邻接矩阵是一个对称矩阵，且邻接矩阵适合存储稠密图，因为它的存储空间是由顶点个数决定的，空间复杂度为O(n^2)，若是稀疏图则没必要花费那么大的空间来存储边的关系。</p>
+<h4 id="二、图的存储"><a href="#二、图的存储" class="headerlink" title="二、图的存储"></a>二、图的存储</h4><h5 id="邻接矩阵"><a href="#邻接矩阵" class="headerlink" title="邻接矩阵"></a>邻接矩阵</h5><p>　　邻接矩阵是指用一个一维数组来存储顶点，用一个二维数组来存储顶点之间的关系。例如n个顶点的图就会构成一个<script type="math/tex">A_{n \times n}</script>的矩阵。若<script type="math/tex">v_i</script>到<script type="math/tex">v_j</script>之间有边，则<script type="math/tex">A_{ij}</script>的值就为1，否则为0。由此可知，图的邻接矩阵是唯一的，无向图的邻接矩阵是一个对称矩阵，且邻接矩阵适合存储稠密图，因为它的存储空间是由顶点个数决定的，空间复杂度为O(<script type="math/tex">n^2</script>)，若是稀疏图则没必要花费那么大的空间来存储边的关系。</p>
 <h5 id="邻接表"><a href="#邻接表" class="headerlink" title="邻接表"></a>邻接表</h5><p>　　与邻接矩阵相比，邻接表就适合存储稀疏图。我们为图的每一个顶点创建一个单链表，并将该边指向的顶点插入到该链表中，因此，无向图的邻接表空间复杂度为O(|V|+2|E|)，有向图则为O(|V|+|E|)。邻接表并不唯一，因为每个顶点对应的单链表，各个顶点的链接次序是任意的。</p>
-<h5 id="十字链表"><a href="#十字链表" class="headerlink" title="十字链表"></a>十字链表</h5><p>　　十字链表是针对有向图的链式存储结构。十字链表为有向图中每个顶点创建了一个节点，每条弧也创建了一个结点，弧结点除去信息有4个域: 尾域、头域、链域hlink指向弧头相同的下一条弧、链域tlink指向弧尾相同的下一条弧。顶点结点除去信息域还有firstin 和firtsout 两个域，分别指向以该顶点为弧头或弧尾的第一个弧结点。注意顶点之间是顺序存储的，十字链表之所以这么设计，是为了方便找到以V[i]为尾或者为头的弧，因而容易求顶点的入度和出度。十字链表不唯一，但一个十字链表表示确定一个图。</p>
+<h5 id="十字链表"><a href="#十字链表" class="headerlink" title="十字链表"></a>十字链表</h5><p>　　十字链表是针对有向图的链式存储结构。十字链表为有向图中每个顶点创建了一个节点，每条弧也创建了一个结点，弧结点除去信息有4个域: 尾域、头域、链域hlink指向弧头相同的下一条弧、链域tlink指向弧尾相同的下一条弧。顶点结点除去信息域还有firstin 和firtsout 两个域，分别指向以该顶点为弧头或弧尾的第一个弧结点。注意顶点之间是顺序存储的，十字链表之所以这么设计，是为了方便找到以<script type="math/tex">v_i</script>为尾或者为头的弧，因而容易求顶点的入度和出度。十字链表不唯一，但一个十字链表表示确定一个图。</p>
 <h5 id="邻接多重表"><a href="#邻接多重表" class="headerlink" title="邻接多重表"></a>邻接多重表</h5><p>　　邻接多重表是针对无向图的链式存储结构。因其查找顶点间是否连通以及删除操作效率较低，应用极少，不做叙述。</p>
-<h4 id="三、图的遍历"><a href="#三、图的遍历" class="headerlink" title="三、图的遍历"></a>三、图的遍历</h4><h5 id="Breadth-First-Search-BFS"><a href="#Breadth-First-Search-BFS" class="headerlink" title="Breadth-First-Search(BFS)"></a>Breadth-First-Search(BFS)</h5><p>　　广度优先算法（BFS）算法的基本思想是，从给定顶点v开始，依次访问v的（还未被访问过的）邻接顶点w1、w2、w3…，然后从w1、w2、w3开始，重复上述的过程，直到所有的顶点都被访问，因此该算法需要借助一个辅助队列来记录正在访问顶点的下一层顶点。需要注意的是，每个顶点只能被访问一次。BFS在数据结构中可以用在Dijkstra单源最短路径算法和Prim最小生成树算法。BFS伪代码如下：</p>
+<h4 id="三、图的遍历"><a href="#三、图的遍历" class="headerlink" title="三、图的遍历"></a>三、图的遍历</h4><h5 id="Breadth-First-Search-BFS"><a href="#Breadth-First-Search-BFS" class="headerlink" title="Breadth-First-Search(BFS)"></a>Breadth-First-Search(BFS)</h5><p>　　广度优先算法（BFS）算法的基本思想是，从给定顶点v开始，依次访问v的（还未被访问过的）邻接顶点<script type="math/tex">w_1、w_2、w_3</script>…，然后从<script type="math/tex">w_1、w_2、w_3</script>开始，重复上述的过程，直到所有的顶点都被访问，因此该算法需要借助一个辅助队列来记录正在访问顶点的下一层顶点。需要注意的是，每个顶点只能被访问一次。BFS在数据结构中可以用在Dijkstra单源最短路径算法和Prim最小生成树算法。BFS伪代码如下：</p>
 <pre><code>bool visited[Max_v];      //标记访问数组
 void BFSTraversre(Graph G)
-&#123;
+{
     for（i = 0; i &lt; G.vexnum; i++)
          visited[i] = false;          //初始化访问数组
     InitQueue(Q);            
     for (i = 0; i &lt; G.vexnum; i++)
         if (!vsisted[i])
             BFS(G, i);      //若顶点未被访问过，则对其进行BFS
-&#125;
+}
 
 void BFS(Graph G, int v)
-&#123;
+{
     visit(v);
     visited[v] = true;             //标记为已访问 
     Enqueue(Q, V);                //v进队
     while (!isEmpty(Q))
-    &#123;
+    {
         DeQueue(Q, v);
         for (w = FirstNeighbor(G, v); w &gt;= 0; w = NextNeighbor(G, v, w)    //v的邻接顶点入队
-        &#123;
+        {
             if(!visited[w])
                 visit[w];
                 visited[w]=TRUE;
                 EnQueue(Q,w);
-        &#125;
-    &#125;
-&#125;
-</code></pre><p>　　BFS算法需要借助辅助队列，而且每个顶点都需要入队一次，所以空间复杂度是O(|V|)。当图采用邻接表存储时，每个顶点需要被访问一次，而访问该顶点的邻接顶点只需要对单链表进行操作，因此时间复杂度为O(|V|+|E|)。当图采用邻接矩阵存储时，查找每个顶点的邻接顶点所需时间为O(|V|)，所以总时间复杂度为O(|V^2|)。</p>
-<h5 id="Depth-First-Search-DFS"><a href="#Depth-First-Search-DFS" class="headerlink" title="Depth-First-Search(DFS)"></a>Depth-First-Search(DFS)</h5><p>　　深度优先算法（DFS）的基本思想是，从给定顶点v出发，访问与v邻接的且未被访问过的顶点w，再从w出发，访问与w邻接且未被访问过的顶点w1，重复此过程，当不能再往下访问时，依次退回到最近被访问的顶点，若他还有邻接顶点未被访问过，则从该点开始继续上述过程，直到所有顶点被访问。因此，DFS算法需要借助递归工作栈来返回最近被访问顶点的值。DFS伪代码如下：</p>
+        }
+    }
+}
+</code></pre><p>　　BFS算法需要借助辅助队列，而且每个顶点都需要入队一次，所以空间复杂度是O(|V|)。当图采用邻接表存储时，每个顶点需要被访问一次，而访问该顶点的邻接顶点只需要对单链表进行操作，因此时间复杂度为O(|V|+|E|)。当图采用邻接矩阵存储时，查找每个顶点的邻接顶点所需时间为O(|V|)，所以总时间复杂度为<script type="math/tex">O(|V^2|)</script>。</p>
+<h5 id="Depth-First-Search-DFS"><a href="#Depth-First-Search-DFS" class="headerlink" title="Depth-First-Search(DFS)"></a>Depth-First-Search(DFS)</h5><p>　　深度优先算法（DFS）的基本思想是，从给定顶点v出发，访问与v邻接的且未被访问过的顶点w，再从w出发，访问与w邻接且未被访问过的顶点<script type="math/tex">w_1</script>，重复此过程，当不能再往下访问时，依次退回到最近被访问的顶点，若他还有邻接顶点未被访问过，则从该点开始继续上述过程，直到所有顶点被访问。因此，DFS算法需要借助递归工作栈来返回最近被访问顶点的值。DFS伪代码如下：</p>
 <pre><code>bool visited[Max_v];      //标记访问数组
 void DFSTraversre(Graph G)
-&#123;
+{
     for（i = 0; i &lt; G.vexnum; i++)
     visited[i] = false;          //初始化访问数组
     for (i = 0; i &lt; G.vexnum; i++)
         if (!vsisted[i])
             DFS(G, i);      //若顶点未被访问过，则对其进行DFS
-&#125;
+}
 
 void DFS(Graph G, int v)
-&#123;
+{
     visit(v);
     visited[v] = TRUE;
     for(w=FirstNeighbor(G,v);w&gt;=0;w=NextNeighbor(G,v,w))
-        if (!visited[w]) &#123;
+        if (!visited[w]) {
             DFS(G, w)
-        &#125;
-&#125;
-</code></pre><p>　　DFS算法需要用到递归工作栈，因此空间复杂度为O(|V|)。当图用邻接表存储时，查找所有顶点需要O(|V|+|E|)。当图用邻接矩阵存储时，每个顶点和其邻接结点的查找都需要O(|V|)，故总时间复杂度为O(|V^2|。</p>
+        }
+}
+</code></pre><p>　　DFS算法需要用到递归工作栈，因此空间复杂度为O(|V|)。当图用邻接表存储时，查找所有顶点需要O(|V|+|E|)。当图用邻接矩阵存储时，每个顶点和其邻接结点的查找都需要O(|V|)，故总时间复杂度为<script type="math/tex">O(|V^2|</script>。</p>
 <h4 id="四、遍历算法的应用及拓展"><a href="#四、遍历算法的应用及拓展" class="headerlink" title="四、遍历算法的应用及拓展"></a>四、遍历算法的应用及拓展</h4><h5 id="连通性和路径查找"><a href="#连通性和路径查找" class="headerlink" title="连通性和路径查找"></a>连通性和路径查找</h5><p>　　遍历算法可以判断图的连通性。例如对于一个无向图，若图是连通的，则从任意顶点出发，仅需一次遍历就可以访问所有的结点。若图非连通，则只能访问到该图的连通分量的结点。<br>　　上文中DFS算法使用了递归，那么非递归的DFS应该怎么设计呢？首先我们需要一个栈，用来存储访问过的结点信息，因为当我们不能再往下访问时，需要回退到最近访问的结点，这个特性刚好可以用栈来实现，我们在访问一个顶点时，要把它放进栈中，当栈非空时，将其取出，再将其邻接的结点放进去，重复上述过程。DFS非递归代码如下：</p>
 <pre><code>bool visited[Max_v]; 
 void DFSTraversre(Graph G)
-&#123;
+{
     for（i = 0; i &lt; G.vexnum; i++)
               visited[i] = false;  
     InitStack(S);
     for (i = 0; i &lt; G.vexnum; i++)
         if (!vsisted[i])
             DFS(G, i); 
-&#125;
+}
 
 void DFS(Graph G, int v)
-&#123;
+{
     Push(S, v);
     visited[v] = true;
     while (!isEmpty(S))
         a = Pop(S);
             visit[a];
-        for (w = NextNeighbor(G, a); w &gt;= 0; w = NextNeighbor(G, a, w)) &#123;
+        for (w = NextNeighbor(G, a); w &gt;= 0; w = NextNeighbor(G, a, w)) {
             if (!visited[w])
                 Push(S, w);
                     visited[w] = true;
-        &#125;
-&#125;
+        }
+}
 </code></pre><p>　　遍历算法还可以应用到查找有向图中是否存在顶点v到顶点w的路径。下面分别用BFS与DFS算法演示：</p>
 <p>　　BFS:</p>
 <pre><code>int BFS(Graph G, int v, int w)
-&#123;
+{
     InitQueue(Q);
     Enqueue(Q, v);
     while (!isEmpty(Q))
@@ -300,37 +412,37 @@ void DFS(Graph G, int v)
         if (u == w)
             return 1;
         for (p = NextNeighbor(G, u); p &gt;= 0; p = NextNeighbor(G, u, p))
-        &#123;
+        {
             if (p == w)         //p=w查找成功，返回1
                 return 1;
             if (!visited[p])    //否则入队
                 EnQueue(Q, p);
                     visited[p] = 1;
-        &#125;
-&#125;
+        }
+}
 </code></pre><p>　　DFS:</p>
 <pre><code>void DFS(Graph G, int v, int w, bool reach)
-&#123;
+{
     if (v == w) 
-    &#123;
+    {
         reach = true;
         return;
-    &#125;
+    }
     visit[v] = true;
     for (i = NextNeighbor(G, v); i &gt;= 0; i = NextNeighbor(G, v, i)) 
-    &#123;
-        if (i == w) &#123;
+    {
+        if (i == w) {
             reach = true;
             return;
-        &#125;
+        }
         DFS(G, i, w, reach);
-    &#125;
-&#125;
-</code></pre><h5 id="Prim-Kruskal最小生成树算法"><a href="#Prim-Kruskal最小生成树算法" class="headerlink" title="Prim/Kruskal最小生成树算法"></a>Prim/Kruskal最小生成树算法</h5><p>　　最小生成树是指包含该图所有顶点并且有着尽可能少的边的树。也就是说对于一个生成树，它的边数等于顶点数减一，如果去掉它的一条边，它会变成非连通图，增加一条边，它就形成一条回路。Prim算法与Kruskal算法都是基于贪心算法的策略。<br>　　Prim算法的基本思想：创建一个空树，选取一个顶点归入树，这时树中就只有一个顶点，然后选取其邻接顶点中与之相连的边权值最小的顶点并入树T，这时T有两个顶点，这时再从其余顶点中选取与该T相连的权值最小的顶点归并到T中，直到所有顶点都在T中。因为每个顶点都至少需要访问与之相连权值最小顶点的顶点一次，故Prim算法的时间复杂度为O(|V^2|)，因此Prim算法更适合边稠密的图。<br>　　Kruskal算法的基本思想：初始状态，将一个图视为只有顶点没有边的独立的连通分量，然后按照边的权值从小到大的排序，不断选择未被选取过且权值最小的边，若该边依附的顶点落在T中不同的连通分量上，则将此边加入T，否则舍弃继续寻找下一条权值最小的边，直到所有顶点都在T中。该算法最大的开销在于边权值的排序，一般我们使用堆排序来解决，时间复杂度为O(|E|log2|E|)，因此Kruskal适合顶点多而边稀疏的图。</p>
-<h5 id="Dijkstra单源最短路径算法"><a href="#Dijkstra单源最短路径算法" class="headerlink" title="Dijkstra单源最短路径算法"></a>Dijkstra单源最短路径算法</h5><p>　　之前介绍遍历的应用中可以查找路径，但那是对于无权图而言，而对于带权图（边有权值，可以想象为距离），我们常常需要寻找带权路径长度最短的那一条路径，并称之为最短路径。<br>　　算法思想：Dijkstra算法设置一个集合来记录已求得最短路径的顶点，初始时把源点v0放入S，每次并入一个新顶点vi时，都要修改源点v0到集合S中其余顶点的当前最短路径值。这里设置了两个辅助数组dist[]和path[]，dist[]用来记录v0到其他顶点的当前最短路径长度，初态，若源点v0到vi有弧，则dist[i]为弧的权值，否则dist[i]为无穷大。path[i]用来记录原点到顶点i之间的最短路径的前驱结点，算法结束后可以追溯到v0到vi的最短路径。<br>　　初始化集合S为{0}，dist[i]=arcs[0][i]，下一步，我们要选出满足dist[j]=Min{dist[i]}的顶点J，也就是选出与v0相连的所有顶点中，带权路径长度最短的那一条，并将其并入集合S，另外，还要修改v0到S（顶点vj并入之后）内其余顶点的路径长度。重复此过程，直到所有顶点并入S。该算法不适用于有权值为负的边，其时间复杂度为O(|V^2|)。</p>
-<h5 id="Floyd多源最短路径算法"><a href="#Floyd多源最短路径算法" class="headerlink" title="Floyd多源最短路径算法"></a>Floyd多源最短路径算法</h5><p>　　算法思想：Floyd算法递推产生一个n阶方阵序列从A^-1，A^0…A^n-1,其中方阵A用来记录顶点之间的路径长度，而上标k=-1，0，n-1指的是顶点之间绕行k个顶点的路径长度。也就是说，在初始状态，若顶点之间有路径，则在方阵中记录路径长度，若无路径，则记录无穷大，之后再来探究顶点之间若是绕行另一个顶点，会不会有路径或者原本的路径减小，此时就要在方阵中进行更新。Floyd算法的时间复杂度为O(|V^3|)。其实用Dijkstra算法轮流将每个顶点作为源点，并在所有边权值为负时运行一次，也可以解决每对顶点之间的最短路径问题。</p>
-<h5 id="拓扑排序"><a href="#拓扑排序" class="headerlink" title="拓扑排序"></a>拓扑排序</h5><p>　　当图用来代表工程活动，顶点表示活动，我们用有向边<vi，vj>代表vi必须先于vj活动的关系，并将这种图记为AOV网。我们构建拓扑排序的步骤一般是：首先从AOV网选择一个没有前驱的顶点并输出，然后从网中删除该顶点以及以它为起点的有向边，重复上述步骤直到当前AOV网为空。</p>
-<h5 id="关键路径"><a href="#关键路径" class="headerlink" title="关键路径"></a>关键路径</h5><p>　　与AOV网相似，AOE网是指整个图中仅有一个入度为0的顶点，称为源点，仅有一个出度为0的顶点，称为汇点。在AOE网上，有些活动是可以并行进行的，从源点到汇点的路径可能有很多条，并且这些路径的长度可能不同。完成所有路径上活动所需的时间可能不同，但所有路径上的活动都已经完成，整个工程才算结束。因此我们将从源点到汇点的所有路径中，具有最大路径长度的路径成为关键路径。<br>　　求解关键路径的步骤如下：从源点出发，拓扑排序求其余顶点的最早发生时间ve；之后从汇点出发，按逆拓扑排序求其余顶点的最迟发生时间vl。根据ve和vl的值分别计算出所有弧的最早开始时间e和最迟开始时间l。若e-l=0，则这个弧就是关键路径中的弧。</p>
+    }
+}
+</code></pre><h5 id="Prim-Kruskal最小生成树算法"><a href="#Prim-Kruskal最小生成树算法" class="headerlink" title="Prim/Kruskal最小生成树算法"></a>Prim/Kruskal最小生成树算法</h5><p>　　最小生成树是指包含该图所有顶点并且有着尽可能少的边的树。也就是说对于一个生成树，它的边数等于顶点数减一，如果去掉它的一条边，它会变成非连通图，增加一条边，它就形成一条回路。Prim算法与Kruskal算法都是基于贪心算法的策略。<br>　　Prim算法的基本思想：创建一个空树，选取一个顶点归入树，这时树中就只有一个顶点，然后选取其邻接顶点中与之相连的边权值最小的顶点并入树T，这时T有两个顶点，这时再从其余顶点中选取与该T相连的权值最小的顶点归并到T中，直到所有顶点都在T中。因为每个顶点都至少需要访问与之相连权值最小顶点的顶点一次，故Prim算法的时间复杂度为O(|<script type="math/tex">V^2</script>|)，因此Prim算法更适合边稠密的图。<br>　　Kruskal算法的基本思想：初始状态，将一个图视为只有顶点没有边的独立的连通分量，然后按照边的权值从小到大的排序，不断选择未被选取过且权值最小的边，若该边依附的顶点落在T中不同的连通分量上，则将此边加入T，否则舍弃继续寻找下一条权值最小的边，直到所有顶点都在T中。该算法最大的开销在于边权值的排序，一般我们使用堆排序来解决，时间复杂度为<script type="math/tex">O(|E|\log_2 {|E|})</script>，因此Kruskal适合顶点多而边稀疏的图。</p>
+<h5 id="Dijkstra单源最短路径算法"><a href="#Dijkstra单源最短路径算法" class="headerlink" title="Dijkstra单源最短路径算法"></a>Dijkstra单源最短路径算法</h5><p>　　之前介绍遍历的应用中可以查找路径，但那是对于无权图而言，而对于带权图（边有权值，可以想象为距离），我们常常需要寻找带权路径长度最短的那一条路径，并称之为最短路径。<br>　　算法思想：Dijkstra算法设置一个集合来记录已求得最短路径的顶点，初始时把源点v0放入S，每次并入一个新顶点vi时，都要修改源点v0到集合S中其余顶点的当前最短路径值。这里设置了两个辅助数组dist[]和path[]，dist[]用来记录v0到其他顶点的当前最短路径长度，初态，若源点<script type="math/tex">v_0</script>到<script type="math/tex">v_i</script>有弧，则dist[i]为弧的权值，否则dist[i]为无穷大。path[i]用来记录原点到顶点i之间的最短路径的前驱结点，算法结束后可以追溯到<script type="math/tex">v_0</script>到<script type="math/tex">v_i</script>的最短路径。<br>　　初始化集合S为{0}，dist[i]=arcs[0][i]，下一步，我们要选出满足dist[j]=Min{dist[i]}的顶点J，也就是选出与v0相连的所有顶点中，带权路径长度最短的那一条，并将其并入集合S，另外，还要修改v0到S（顶点vj并入之后）内其余顶点的路径长度。重复此过程，直到所有顶点并入S。该算法不适用于有权值为负的边，其时间复杂度为<script type="math/tex">O(|V^2|)</script>。</p>
+<h5 id="Floyd多源最短路径算法"><a href="#Floyd多源最短路径算法" class="headerlink" title="Floyd多源最短路径算法"></a>Floyd多源最短路径算法</h5><p>　　算法思想：Floyd算法递推产生一个n阶方阵序列从<script type="math/tex">A^{-1}，A^0...A^{n-1}</script>,其中方阵A用来记录顶点之间的路径长度，而上标k=-1，0，n-1指的是顶点之间绕行k个顶点的路径长度。也就是说，在初始状态，若顶点之间有路径，则在方阵中记录路径长度，若无路径，则记录无穷大，之后再来探究顶点之间若是绕行另一个顶点，会不会有路径或者原本的路径减小，此时就要在方阵中进行更新。Floyd算法的时间复杂度为O(|<script type="math/tex">V^3</script>|)。其实用Dijkstra算法轮流将每个顶点作为源点，并在所有边权值为负时运行一次，也可以解决每对顶点之间的最短路径问题。</p>
+<h5 id="拓扑排序"><a href="#拓扑排序" class="headerlink" title="拓扑排序"></a>拓扑排序</h5><p>　　当图用来代表工程活动，顶点表示活动，我们用有向边&lt;<script type="math/tex">v_i</script>，<script type="math/tex">v_j</script>&gt;代表<script type="math/tex">v_i</script>必须先于<script type="math/tex">v_j</script>活动的关系，并将这种图记为AOV网。我们构建拓扑排序的步骤一般是：首先从AOV网选择一个没有前驱的顶点并输出，然后从网中删除该顶点以及以它为起点的有向边，重复上述步骤直到当前AOV网为空。</p>
+<h5 id="关键路径"><a href="#关键路径" class="headerlink" title="关键路径"></a>关键路径</h5><p>　　与AOV网相似，AOE网是指整个图中仅有一个入度为0的顶点，称为源点，仅有一个出度为0的顶点，称为汇点。在AOE网上，有些活动是可以并行进行的，从源点到汇点的路径可能有很多条，并且这些路径的长度可能不同。完成所有路径上活动所需的时间可能不同，但所有路径上的活动都已经完成，整个工程才算结束。因此我们将从源点到汇点的所有路径中，具有最大路径长度的路径成为关键路径。<br>　　求解关键路径的步骤如下：从源点出发，拓扑排序求其余顶点的最早发生时间<script type="math/tex">v_e</script>；之后从汇点出发，按逆拓扑排序求其余顶点的最迟发生时间<script type="math/tex">v_l</script>。根据<script type="math/tex">v_e</script>和<script type="math/tex">v_l</script>的值分别计算出所有弧的最早开始时间e和最迟开始时间l。若e-l=0，则这个弧就是关键路径中的弧。</p>
 
         </div>
 
@@ -582,7 +694,6 @@ void DFS(Graph G, int v)
             all[i].SourceElement().parentNode.className += ' has-jax';
     });
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
+<script src="//cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/unitychan.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
 </html>
