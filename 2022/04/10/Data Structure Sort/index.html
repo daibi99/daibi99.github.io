@@ -178,7 +178,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>306 Words</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>312 Words</span>
         </span>
     
     
@@ -197,7 +197,7 @@
         <div class="article-content markdown-body">
             <p>　　本文主要做了数据结构——排序的知识整理。</p>
 <h4 id="一、插入排序"><a href="#一、插入排序" class="headerlink" title="一、插入排序"></a>一、插入排序</h4><p>　　插入排序的基本思想是每次将一个待排序的记录按其大小插入到前面已排好续的子序列，直到全部记录插入完成。由此思想引申出三种插入排序算法：直接插入排序、折半插入排序和希尔排序。</p>
-<h5 id="直接插入排序"><a href="#直接插入排序" class="headerlink" title="直接插入排序"></a>直接插入排序</h5><p>　　直接插入排序是最简单也是最直观的。我们要将元素E[i]插入到已有序的子序列E[1…i-1]，首先要在E[1…i-1]中按照元素大小找到元素E[i]插入的位置k，之后将E[k…i-1]中的所有元素后移一个位置，再将E[i]插入到E[k]。下面是直接插入排序的代码：<br>```<br>void InsertSort(ElemType A[], int n)         //给定n个元素的数组进行排序<br>{<br>    int i, j;<br>    for (i = 2; i &lt;= n; i++)<br>    {<br>        if (A[i] &lt; A[i - 1])<br>        {<br>            A[0] = A[i];<br>            for (j = i - 1; A[0] &lt; A[j]; —j)   //这里的—j是先自减，再赋值，也就是说该for循环中的j为1, 但循环结束之后, j的值为0。<br>                A[j + 1] = A[j];<br>            A[j + 1] = A[0];<br>        }<br>    }<br>}
+<h5 id="直接插入排序"><a href="#直接插入排序" class="headerlink" title="直接插入排序"></a>直接插入排序</h5><p>　　直接插入排序是最简单也是最直观的。我们要将元素E[i]插入到已有序的子序列E[1…i-1]，首先要在E[1…i-1]中按照元素大小找到元素E[i]插入的位置k，之后将E[k…i-1]中的所有元素后移一个位置，再将E[i]插入到E[k]。下面是直接插入排序的代码：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">void InsertSort(ElemType A[], int n)         //给定n个元素的数组进行排序</span><br><span class="line">&#123;</span><br><span class="line">	int i, j;</span><br><span class="line">	for (i = 2; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		if (A[i] &lt; A[i - 1])</span><br><span class="line">		&#123;</span><br><span class="line">			A[0] = A[i];</span><br><span class="line">			for (j = i - 1; A[0] &lt; A[j]; --j)   //这里的--j是先自减，再赋值，也就是说该for循环中的j为1, 但循环结束之后, j的值为0。</span><br><span class="line">				A[j + 1] = A[j];</span><br><span class="line">			A[j + 1] = A[0];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 　　</p>
 
         </div>
