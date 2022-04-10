@@ -28,7 +28,119 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
 
 
 <body>
@@ -181,7 +293,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>545 Words</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>539 Words</span>
         </span>
     
     
@@ -202,20 +314,20 @@
 <h4 id="一、插入排序"><a href="#一、插入排序" class="headerlink" title="一、插入排序"></a>一、插入排序</h4><p>　　插入排序的基本思想是每次将一个待排序的记录按其大小插入到前面已排好序的子序列，直到全部记录插入完成。由此思想引申出三种插入排序算法：直接插入排序、折半插入排序和希尔排序。</p>
 <h5 id="直接插入排序"><a href="#直接插入排序" class="headerlink" title="直接插入排序"></a>直接插入排序</h5><p>　　直接插入排序是最简单也是最直观的。我们要将元素E[i]插入到已有序的子序列E[1…i-1]，首先要在E[1…i-1]中按照元素大小找到元素E[i]插入的位置k，之后将E[k…i-1]中的所有元素后移一个位置，再将E[i]插入到E[k]。下面是直接插入排序的代码：</p>
 <pre><code>void InsertSort(ElemType A[], int n)         //给定n个元素的数组进行排序
-&#123;
+{
     int i, j;
     for (i = 2; i &lt;= n; i++)
-    &#123;
+    {
         if (A[i] &lt; A[i - 1])
-        &#123;
+        {
             A[0] = A[i];
             for (j = i - 1; A[0] &lt; A[j]; --j)   //这里的--j是先自减，再赋值，也就是说该for循环中的j为1, 但循环结束之后, j的值为0。
                 A[j + 1] = A[j];
             A[j + 1] = A[0];
-        &#125;
-    &#125;
-&#125;
-</code></pre><p>　　性能分析：直接插入排序使用了常数个辅助单元，所以空间复杂度为O(1)。最好情况下，给定的元素本就是有序的，因此在排序过程中只需要比较元素而不用移动元素，因此时间复杂度为O(n)。最坏情况下，给定的元素为逆序，每次插入不仅需要比较次数最大，而且需要移动的次数也是最大的，平均情况下，取最好与最坏情况的平均值为n^2/4。因此直接插入排序算法的时间复杂的是O(n^2)。由于每次插入元素时总是向前比较再移动，所以不会出现相同元素相对位置改变的情况，因此直接插入排序是一个稳定的排序方法。</p>
+        }
+    }
+}
+</code></pre><p>　　性能分析：直接插入排序使用了常数个辅助单元，所以空间复杂度为O(1)。最好情况下，给定的元素本就是有序的，因此在排序过程中只需要比较元素而不用移动元素，因此时间复杂度为O(n)。最坏情况下，给定的元素为逆序，每次插入不仅需要比较次数最大，而且需要移动的次数也是最大的，平均情况下，取最好与最坏情况的平均值为<script type="math/tex">n^2</script>/4。因此直接插入排序算法的时间复杂的是<script type="math/tex">O(n^2)</script>。由于每次插入元素时总是向前比较再移动，所以不会出现相同元素相对位置改变的情况，因此直接插入排序是一个稳定的排序方法。</p>
 <h5 id="折半插入排序"><a href="#折半插入排序" class="headerlink" title="折半插入排序"></a>折半插入排序</h5><p>　　折半插入排序的基本思想是</p>
 
         </div>
