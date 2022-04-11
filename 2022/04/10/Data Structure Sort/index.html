@@ -295,7 +295,7 @@ mjx-container[display="true"] + br {
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>2.3k Words</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>2.5k Words</span>
         </span>
     
     
@@ -425,8 +425,28 @@ int Partition(int A[], int low, int high)
     }
 }
 </code></pre><p>　　性能分析：该算法空间复杂度为O(1)，但是其比较次数与初始序列无关，导致其时间复杂度始终为<script type="math/tex">O(n^2)</script>。并且简单选择排序是一个不稳定的算法。</p>
-<h5 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h5><p>　　我们可以将堆视为一颗完全二叉树，当满足左右孩子结点均小于等于双亲结点的时候，我们称之为大根堆，当左右孩子结点均大于等于双亲结点的时候，我们称之为小根堆。我们以大根堆为例，排序思路很简单，就是输出堆顶元素，它一定是最大的，输出之后，把堆底元素送入堆顶，但是此时已经不满足大根堆了，因此我们要重组大根堆，接着继续输出堆顶元素。因此我们主要的问题有两个：一是如何将无序序列构造成大根堆；二是输出大根堆元素后，如何将剩余的元素调整为大根堆。
-　　</p>
+<h5 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h5><p>　　我们可以将堆视为一颗完全二叉树，当满足左右孩子结点均小于等于双亲结点的时候，我们称之为大根堆，当左右孩子结点均大于等于双亲结点的时候，我们称之为小根堆。我们以大根堆为例，排序思路很简单，就是输出堆顶元素，它一定是最大的，输出之后，把堆底元素送入堆顶，但是此时已经不满足大根堆了，因此我们要重组大根堆，接着继续输出堆顶元素。因此我们主要的问题有两个：一是如何将无序序列构造成大根堆；二是输出大根堆元素后，如何将剩余的元素调整为大根堆。建立大根堆的算法如下：</p>
+<pre><code>void BuildMaxHeap(int A[], int len)
+{
+    for (int i = len / 2; i &gt; 0; i--)
+        HeadAdjust(A, i, len);
+}
+void HeadAdjust(int A[], int k, int len)
+{
+    A[0] = A[k];
+    for (int i = k * 2; i &lt;= len; i *= 2) 
+    {
+        if (i &lt; len &amp;&amp; A[i] &lt; A[i + 1])
+            i++;
+        if (A[0] &gt;= A[i])  break;
+        else 
+        {
+            A[k] = A[i];
+            k = i;
+        }
+    }
+}
+</code></pre><p>　　性能分析：空间复杂度为Ｏ(1), 首先建堆时间为O(n)，调整时间为O(h)，所有平均时间复杂度为<script type="math/tex">O(n\log_2 n)</script>。另外，堆排序是不稳定的排序算法。</p>
 
         </div>
 
