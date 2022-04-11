@@ -293,12 +293,12 @@ mjx-container[display="true"] + br {
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>1.5k Words</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>2k Words</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>5 Mins</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>7 Mins</span>
         </span>
     
     
@@ -327,7 +327,7 @@ mjx-container[display="true"] + br {
         }
     }
 }
-</code></pre><p>　　性能分析：直接插入排序使用了常数个辅助单元，所以空间复杂度为O(1)。最好情况下，给定的元素本就是有序的，因此在排序过程中只需要比较元素而不用移动元素，因此时间复杂度为O(n)。最坏情况下，给定的元素为逆序，每次插入不仅需要比较次数最大，而且需要移动的次数也是最大的，平均情况下，取最好与最坏情况的平均值为<script type="math/tex">n^2/4</script>。因此直接插入排序算法的时间复杂的是<script type="math/tex">O(n^2)</script>。由于每次插入元素时总是向前比较再移动，所以不会出现相同元素相对位置改变的情况，因此直接插入排序是一个稳定的排序方法。</p>
+</code></pre><p>　　性能分析：直接插入排序使用了常数个辅助单元，所以空间复杂度为O(1)。最好情况下，给定的元素本就是有序的，因此在排序过程中只需要比较元素而不用移动元素，因此时间复杂度为O(n)。最坏情况下，给定的元素为逆序，每次插入不仅需要比较次数最大，而且需要移动的次数也是最大的，平均情况下，取最好与最坏情况的平均值为<script type="math/tex">n^2</script>/4。因此直接插入排序算法的时间复杂的是<script type="math/tex">O(n^2)</script>。由于每次插入元素时总是向前比较再移动，所以不会出现相同元素相对位置改变的情况，因此直接插入排序是一个稳定的排序方法。</p>
 <h5 id="折半插入排序"><a href="#折半插入排序" class="headerlink" title="折半插入排序"></a>折半插入排序</h5><p>　　折半插入排序与直接插入排序不同的地方在于，直接插入排序是边比较边移动元素，而折半插入排序是先折半查找出元素的待插入位置，然后统一地移动待插入位置之后的所有元素。在对于顺序存储的线性表，所以查找有序子表时可以用折半查找来实现。下面是折半插入排序的代码：</p>
 <pre><code>void InsertSort(ElemType A[], int n) {
     int i, j, high, low, mid;
@@ -366,7 +366,7 @@ mjx-container[display="true"] + br {
 }
 </code></pre><p>　　性能分析：希尔排序只用了常数个辅助单元，空间复杂度为O(1)。它的时间复杂度依赖于增量序列的函数，这是数学上的问题，分析较为困难，最坏的时间复杂度为<script type="math/tex">O(n^2)</script>。当相同关键字被划分到不同子表的时候，可能会改变相对次序，因此希尔排序是不稳定的算法。</p>
 <h4 id="二、交换排序"><a href="#二、交换排序" class="headerlink" title="二、交换排序"></a>二、交换排序</h4><p>　　交换排序的意思是根据序列中两个元素的关键字的比较结果来交换这两个元素在序列中的位置，这里主要介绍冒泡排序算法和快速排序算法。</p>
-<h5 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h5><p>　　冒泡排序的基本思想是，从后往前（或是从前往后），比较两两元素的值，若是逆序，则交换两元素位置，直到序列比较完成，该过程就很像第一趟排序把最小的元素从后面“浮上来”，然后不再参与比较，第二趟就继续把最小的浮上来，重复此过程。冒泡排序的代码如下：</p>
+<h5 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h5><p>　　冒泡排序的基本思想是，从后往前（或是从前往后），比较两两元素的值，若是逆序，则交换两元素位置，直到序列比较完成，该过程就很像第一趟排序把最小的元素从后面“浮上来”，然后不再参与比较，第二趟就继续把最小的浮上来，也就是说每一轮冒泡排序，都有一个最小的数从待排序序列中“浮”出来，重复此过程直到一轮比较下来没有发生元素交换，说明已经有序。冒泡排序的代码如下：</p>
 <pre><code>void BubbleSort(ElemType A[], int n)
 {
     for (int i = 0; i &lt; n - 1; i++)
@@ -382,8 +382,33 @@ mjx-container[display="true"] + br {
             return;      
     }
 }
-</code></pre><p>　　性能分析：空间复杂度为O(1)。最好情况是原本有序，比较次数为n-1次，时间复杂度为O(n)，最坏情况为逆序，时间复杂度为<script type="math/tex">O(n^2)</script>。当i&gt;j且A[i]=A[j]时，元素不会发生交换，所以相对位置不会改变，因此冒泡排序是稳定的算法。
-　　</p>
+</code></pre><p>　　性能分析：空间复杂度为O(1)。最好情况是原本有序，比较次数为n-1次，时间复杂度为O(n)，最坏情况为逆序，时间复杂度为<script type="math/tex">O(n^2)</script>。当i&gt;j且A[i]=A[j]时，元素不会发生交换，所以相对位置不会改变，因此冒泡排序是稳定的算法。</p>
+<h5 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h5><p>　　快速排序的思想是基于分治算法的，它从待排序序列L[1…n]中任取一个枢纽pivot，通过一伦快速排序将原排序系列分为L[1…k-1]和L[k+1..n]，其中L[1…k-1]的元素都比pivot小，L[k+1…n]中的元素都大于等于pivot，这样pivot就被放在了最终位置上，也就是说，一趟快速排序结束，一定会有一个元素会被放在最终位置。快速排序算法的代码如下：</p>
+<pre><code>void QuickSort(int A[], int low, int high)
+{
+    if (low &lt; high)
+    {
+        int pivotpos = Partition(A, low, high);
+        QuickSort(A, low, pivotpos - 1);        //递归排序划分子表
+        QuickSort(A, pivotpos + 1, high);
+    }
+}
+int Partition(int A[], int low, int high)
+{
+    int pivot = A[low];
+    while (low &lt; high)
+    {
+        while (low &lt; high &amp;&amp; pivot &lt;= A[high])
+            --high;
+        A[low] = A[high];
+        while (low &lt; high &amp;&amp; pivot &gt;A[low])
+            ++low;
+        A[high] = A[low];
+    }
+    A[low] = pivot;
+    return low;            //返回存放枢纽的最终位置
+}
+</code></pre><p>　　性能分析：因为算法调用了递归工作栈，其空间复杂度与调用次数有关，最好情况下为<script type="math/tex">O(\log_2 n)</script>，最坏情况下要n-1次，平均情况下空间复杂度为<script type="math/tex">O(\log_2 n)</script>。<br>　　试想对一个基本有序的序列进行快速排序，选取了第一个元素作为枢纽，而它本就是序列中最大的元素了，因此划分出的两个子表中元素个数分别是0,n-1，但是还是要对两个子表进行快排，就造成了时间的大量浪费，因此快速排序不适合基本有序的序列。最理想条件下则是分割成两个等量长度的子序列，也就是选择枢纽的值尽可能把序列平等分割。这时候快排的时间复杂度为<script type="math/tex">O(n\log_2 n)</script>。需要注意的是，快速排序算法是所有内部排序算法中平均性能最优的。</p>
 
         </div>
 
@@ -429,7 +454,7 @@ mjx-container[display="true"] + br {
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2022</span>
+              <span>2021</span>
               -
             
             2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">daibi</a>
@@ -620,6 +645,6 @@ mjx-container[display="true"] + br {
             all[i].SourceElement().parentNode.className += ' has-jax';
     });
 </script>
-<script src="//cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/unitychan.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
 </html>
