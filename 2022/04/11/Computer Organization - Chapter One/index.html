@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Intensive Reading of Artificial Intelligence Papers">
+    <meta name="author" content="daibi">
+    
+    <title>
+        
+            Computer Organization - Chapter One |
+        
+        daibi&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/strawberry.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/1.jpg","favicon":"/images/strawberry.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"In the Bleak Midwinter."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                daibi&#39;s blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Computer Organization - Chapter One</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/1.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">daibi</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-04-11 15:02:38</span>
+        <span class="mobile">2022-04-11 15:02</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Nonsense/">Nonsense</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>2.3k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>7 Mins</span>
+        </span>
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>　　本文主要做了计算机组成原理——冯·诺依曼计算机的知识整理</p>
+<h4 id="一、硬件结构"><a href="#一、硬件结构" class="headerlink" title="一、硬件结构"></a>一、硬件结构</h4><p>　　冯·诺依曼计算机由运算器、控制器、存储器、输入设备和输出设备组成，其中运算器和控制器被合称为中央处理器（Central Processing Unit, CPU)。</p>
+<h5 id="运算器"><a href="#运算器" class="headerlink" title="运算器"></a>运算器</h5><p>　　运算器的主要功能是对数据或数据进行处理或运算，并暂存处理或运算结果。<br>　　因为最频繁的运算为算术运算和逻辑运算，而算术运算是在逻辑运算的基础上实现的，所有这两种运算常用一个部件实现，我们将其称为算术逻辑单元（Arithmetic Logic Unit, ALU）。但是由于ALU只处理整型数据，而且整数和实数的运算方法不同，所有运算器也会增设浮点运算部件FPU（Float Point Unit）用来处理实数。<br>　　ALU的核心是加法器，它不仅可以实现加减等双目算术运算，也可以实现与、或、非等双目或是单目逻辑运算，因此ALU有两个数据入端、一个数据出端。为了保存运算结果，在运算器中还会有若干个寄存器，它们通常被称为寄存器堆、寄存器组或寄存器文件，它们不仅可以保存数据，还可以保存地址、状态等<br>　　可见，运算器一般由ALU、FPU、寄存器等组成。</p>
+<h5 id="控制器"><a href="#控制器" class="headerlink" title="控制器"></a>控制器</h5><p>　　控制器的主要功能是指挥和控制各部件协调工作，来实现程序的自动执行。<br>　　通常来说，程序执行过程是循环的指令执行过程，指令执行过程分为取指令、分析指令和执行指令三个阶段，循环变量为指令地址，下条指令地址由当前指令产生。<br>　　为了实现指令的循环，控制器需要有两个专用寄存器，一个是程序计数器PC（Program Counter, PC）用来存放作为循环变量的指令地址；另一个称为指令寄存器（Instruction Register, IR）用来存放当前指令的内容。也就是说，取指阶段总是用PC的内容为地址去存储器取指令，然后存放到IR中。<br>　　另外，为了实现当前指令的功能，控制器还需要指令译码器（Instruction Decode，ID）用来分析IR中的指令的操作类型及操作数类型，再用控制单元（Control Unit，CU）产生部件控制信号。<br>　　可见，控制器一般由PC，IR，ID，CU等组成。</p>
+<h5 id="存储器"><a href="#存储器" class="headerlink" title="存储器"></a>存储器</h5><p>　　存储器的主要功能是存储信息，可以通过操作实现信息的写入和读出。<br>　　存储器的存储空间由若干个存储单元构成，每个存储单元由多个存储元构成，每个存储元可以存储一位二进制信息（0或1）。存储器的容量＝存储单元个数 x 存储单元长度。由于存储器是按地址进行访问，所以访问的地址为存储单元的地址，存储器的外部引脚必须包含地址引脚、命令引脚、数据引脚。<br>　　对存储器的操作一般只有读和写。读操作时，先向存储器发出地址及读命令，存储器根据地址来选择存储单元，并将所选存储单元的存储字送到数据引脚。写操作时，同样需要向存储器发出地址及写命令，然后向存储器发出所写数据，存储器根据地址来选择存储单元，并将数据引脚上的数据写入存储单元。</p>
+<h4 id="二、设备互联的实现"><a href="#二、设备互联的实现" class="headerlink" title="二、设备互联的实现"></a>二、设备互联的实现</h4><h5 id="总线结构"><a href="#总线结构" class="headerlink" title="总线结构"></a>总线结构</h5><p>　　总线也就是设备间进行信息传输的公共信号线，总线上的设备通过地址（设备编号）来进行识别。系统总线通常由地址总线、数据总线、控制总线三种信号线组成。<br>　　总线方式的优点是传输控制简单、可扩展性好，因为它对所有设备适用，仅仅是传输的目标地址不同而已，因此传输控制极为简单。另外，新设备连接到总线上，只需要它的地址与总线上的设备的地址不同即可。总线方式的缺点也很明显，就是需要分时进行信息传输，因为总线信号线是共用的，所有任何时候只能有一个设备在发送状态，其他设备都只能处于接收状态。<br>　　为了将外设连接到总线上，需要在外设与总线间增设连接点了，也就是I/O接口，它的主要功能是实现数据缓冲、格式转换、通信控制。</p>
+<h5 id="总线传输"><a href="#总线传输" class="headerlink" title="总线传输"></a>总线传输</h5><p>　　总线上的不同设备通过地址进行识别，对于主设备而言，总线命令只有读、写两类。<br>　　第①步，主设备发送地址和命令，所有从设备判断自己是否是目标设备，若是则响应操作。第②步，当命令为读时，从设备发送数据、发送状态（完成），主设备根据状态信号接收数据；命令为写时，主设备发送数据，从设备接受并写入数据、发送状态（完成）。传送完成后，各自撤销所发信号。由于需要处理操作命令，读操作第①步时间稍长，写操作第②步时间稍长。</p>
+<h4 id="三、计算机的工作方式"><a href="#三、计算机的工作方式" class="headerlink" title="三、计算机的工作方式"></a>三、计算机的工作方式</h4><h5 id="程序的执行顺序"><a href="#程序的执行顺序" class="headerlink" title="程序的执行顺序"></a>程序的执行顺序</h5><p>　　冯·诺依曼计算机都采用存储程序工作方式，存储程序工作方式的基本思想是：程序和数据预先放在存储器中，程序执行时，自动、逐条从存储器中取出指令并执行。<br>　　因为程序需要放在主存中才能执行，而主存是按地址访问的，所以程序的空间需要按主存单元空间长度进行编址，由于生成程序时并不知道程序运行时在主存的地址，所以一般从0开始编址，又称逻辑地址。程序由多条指令构成，每条指令占一个或几个存储单元，指令地址一般用其所占第一个存储单元的地址表示，指令地址和数据地址由两重含义，在程序中的地址叫逻辑地址，在主存中的地址称为物理地址。<br>　　顺序型指令的下条指令地址=当前指令地址+“1”，1表示一条指令所占存储单元个数。转移型指令下条指令地址=当前指令的操作结果或者=当前指令地址+“1”。</p>
+<h5 id="程序的执行机制"><a href="#程序的执行机制" class="headerlink" title="程序的执行机制"></a>程序的执行机制</h5><p>　　取指阶段的功能是，用PC的内容作为地址从内存中读出指令，并放入IR；分析指令阶段的功能是，通过ID分析IR中内容包含的操作类型、操作数信息，再用CU产生部件控制信号；执行指令阶段的功能是，根据指令分析结果，实现相应的约定操作。<br>　　对该执行机制的优化也就是想办法减少每轮循环的时间，对于顺序型指令，下条指令地址计算与当前指令内容无关，则可以将PC=（PC）+“1” 放在取指阶段或者译码阶段。对于转移型指令，下条指令地址的计算放在执行阶段，也可以提高性能。<br>　　程序执行有两个初始条件：一是程序被调入主存，二是程序首条指令地址被置入PC。</p>
+<h4 id="四、计算机系统的性能指标"><a href="#四、计算机系统的性能指标" class="headerlink" title="四、计算机系统的性能指标"></a>四、计算机系统的性能指标</h4><h5 id="机器字长"><a href="#机器字长" class="headerlink" title="机器字长"></a>机器字长</h5><p>　　机器字长又称CPU字长，指CPU一次能处理数据的二进制位数。机器字长越长，运算精度越高。若机器字长较短，则位数较多的数据运算需要拆分几次运算。</p>
+<h5 id="CPU主频"><a href="#CPU主频" class="headerlink" title="CPU主频"></a>CPU主频</h5><p>　　CPU主频是指CPU主时钟信号的频率，它是时钟周期的倒数，它的高低很大程度上决定了CPU工作速度。</p>
+<h5 id="存储容量"><a href="#存储容量" class="headerlink" title="存储容量"></a>存储容量</h5><p>　　CPU可以直接访问主存，所以CPU寻址空间受到主存地址空间的影响，也就影响了CPU地址引脚的位数。CPU地址引脚需要按照主存地址空间来设置，与主存的配置容量无关，例如主存按字节编址，4GB，则主存地址为32位，CPU寻址空间也为32位。</p>
+<h5 id="响应时间"><a href="#响应时间" class="headerlink" title="响应时间"></a>响应时间</h5><p>　　响应时间指的是执行时间，指任务从提交到完成所花的全部时间，包括CPU运算，贮存访问、I/O操作、操作系统开销等所有的时间，<script type="math/tex">T_{响应}=T_{cpu}+T_{等待}</script>。因为现代计算机当程序等待I/O操作完成时，CPU会转去执行其他程序，所以等待时间一般忽略通过比较CPU时间来比较计算机性能。</p>
+<h5 id="吞吐率"><a href="#吞吐率" class="headerlink" title="吞吐率"></a>吞吐率</h5><p>　　MIPS（Million Instructions Per Second) 与MFLOPS (Million Floating-Point Operations Per Sencond) ，吞吐率=n个任务的总工作量/完成n个任务的总时间。</p>
+
+        </div>
+
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/04/10/Data%20Structure%20Sort/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Data structure - Sort</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">daibi</a>
+        </div>
+        
+      
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%A1%AC%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="nav-text">一、硬件结构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E5%99%A8"><span class="nav-text">运算器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="nav-text">控制器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%99%A8"><span class="nav-text">存储器</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E8%AE%BE%E5%A4%87%E4%BA%92%E8%81%94%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-text">二、设备互联的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%80%BB%E7%BA%BF%E7%BB%93%E6%9E%84"><span class="nav-text">总线结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%80%BB%E7%BA%BF%E4%BC%A0%E8%BE%93"><span class="nav-text">总线传输</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%96%B9%E5%BC%8F"><span class="nav-text">三、计算机的工作方式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="nav-text">程序的执行顺序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6"><span class="nav-text">程序的执行机制</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87"><span class="nav-text">四、计算机系统的性能指标</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%97%E9%95%BF"><span class="nav-text">机器字长</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CPU%E4%B8%BB%E9%A2%91"><span class="nav-text">CPU主频</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%AE%B9%E9%87%8F"><span class="nav-text">存储容量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E6%97%B6%E9%97%B4"><span class="nav-text">响应时间</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%90%9E%E5%90%90%E7%8E%87"><span class="nav-text">吞吐率</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/unitychan.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
+</html>
