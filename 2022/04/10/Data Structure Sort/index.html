@@ -17,7 +17,9 @@
 <link rel="stylesheet" href="/css/style.css">
 
     <link rel="shortcut icon" href="/images/strawberry.svg">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
@@ -293,12 +295,12 @@ mjx-container[display="true"] + br {
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>2k Words</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>2.3k Words</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>7 Mins</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>9 Mins</span>
         </span>
     
     
@@ -382,8 +384,8 @@ mjx-container[display="true"] + br {
             return;      
     }
 }
-</code></pre><p>　　性能分析：空间复杂度为O(1)。最好情况是原本有序，比较次数为n-1次，时间复杂度为O(n)，最坏情况为逆序，时间复杂度为<script type="math/tex">O(n^2)</script>。当i&gt;j且A[i]=A[j]时，元素不会发生交换，所以相对位置不会改变，因此冒泡排序是稳定的算法。</p>
-<h5 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h5><p>　　快速排序的思想是基于分治算法的，它从待排序序列L[1…n]中任取一个枢纽pivot，通过一伦快速排序将原排序系列分为L[1…k-1]和L[k+1..n]，其中L[1…k-1]的元素都比pivot小，L[k+1…n]中的元素都大于等于pivot，这样pivot就被放在了最终位置上，也就是说，一趟快速排序结束，一定会有一个元素会被放在最终位置。快速排序算法的代码如下：</p>
+</code></pre><p>　　性能分析: 空间复杂度为O(1)。最好情况是原本有序，只做一遍比较，最坏情况为原本逆序，时间复杂度为<script type="math/tex">O(n^2)</script>。</p>
+<h5 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h5><p>　　快速排序的思想是基于分治算法的，它从待排序序列L[1…n]中任取一个枢纽pivot，通过一轮快速排序将原排序系列分为L[1…k-1]和L[k+1..n]，其中L[1…k-1]的元素都比pivot小，L[k+1…n]中的元素都大于等于pivot，这样pivot就被放在了最终位置上，也就是说，一趟快速排序结束，一定会有一个元素会被放在最终位置。快速排序算法的代码如下：</p>
 <pre><code>void QuickSort(int A[], int low, int high)
 {
     if (low &lt; high)
@@ -408,7 +410,23 @@ int Partition(int A[], int low, int high)
     A[low] = pivot;
     return low;            //返回存放枢纽的最终位置
 }
-</code></pre><p>　　性能分析：因为算法调用了递归工作栈，其空间复杂度与调用次数有关，最好情况下为<script type="math/tex">O(\log_2 n)</script>，最坏情况下要n-1次，平均情况下空间复杂度为<script type="math/tex">O(\log_2 n)</script>。<br>　　试想对一个基本有序的序列进行快速排序，选取了第一个元素作为枢纽，而它本就是序列中最大的元素了，因此划分出的两个子表中元素个数分别是0,n-1，但是还是要对两个子表进行快排，就造成了时间的大量浪费，因此快速排序不适合基本有序的序列。最理想条件下则是分割成两个等量长度的子序列，也就是选择枢纽的值尽可能把序列平等分割。这时候快排的时间复杂度为<script type="math/tex">O(n\log_2 n)</script>。需要注意的是，快速排序算法是所有内部排序算法中平均性能最优的。</p>
+</code></pre><p>　　性能分析：因为算法调用了递归工作栈，其空间复杂度与调用次数有关，最好情况下为<script type="math/tex">O(\log_2 n)</script>，最坏情况下要n-1次，平均情况下空间复杂度为<script type="math/tex">O(\log_2 n)</script>。<br>　　试想对一个基本有序的序列进行快速排序，选取了第一个元素作为枢纽，而它本就是序列中最大的元素了，因此划分出的两个子表中元素个数分别是0,n-1，但是还是要对两个子表进行快排，就造成了时间的大量浪费，因此快速排序不适合基本有序的序列。最理想条件下则是分割成两个等量长度的子序列，也就是选择枢纽的值尽可能把序列平等分割。这时候快排的时间复杂度为<script type="math/tex">O(n\log_2 n)</script>, 需要注意的是，快速排序算法是所有内部排序算法中平均性能最优的。</p>
+<h4 id="三、选择排序"><a href="#三、选择排序" class="headerlink" title="三、选择排序"></a>三、选择排序</h4><h5 id="简单选择排序"><a href="#简单选择排序" class="headerlink" title="简单选择排序"></a>简单选择排序</h5><p>　　简单选择排序的基本思想是：每i次排序都在待排序的n-i+1个元素中选择一个最小的元素，作为有序队列的第i个元素，直到n-1次排序结束。简单选择排序算法的代码如下：</p>
+<pre><code>void SeleceSort(int A[], int n)
+{
+    for (int i = 0; i &lt; n; i++)
+    {
+        int min = i;
+        for (int j = i + 1; j &lt; n; j++)
+                if (A[j] &lt; A[min])
+                min = j;
+        if (min != i)
+            swap(A[i], A[min]);
+    }
+}
+</code></pre><p>　　性能分析：该算法空间复杂度为O(1)，但是其比较次数与初始序列无关，导致其时间复杂度始终为<script type="math/tex">O(n^2)</script>。并且简单选择排序是一个不稳定的算法。</p>
+<h5 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h5><p>　　我们可以将堆视为一颗完全二叉树，当满足左右孩子结点均小于等于双亲结点的时候，我们称之为大根堆，当左右孩子结点均大于等于双亲结点的时候，我们称之为小根堆。我们以大根堆为例，排序思路很简单，就是输出堆顶元素，它一定是最大的，输出之后，把堆底元素送入堆顶，但是此时已经不满足大根堆了，因此我们要重组大根堆，接着继续输出堆顶元素。因此我们主要的问题有两个：一是如何将无序序列构造成大根堆；二是输出大根堆元素后，如何将剩余的元素调整为大根堆。
+　　</p>
 
         </div>
 
@@ -418,6 +436,21 @@ int Partition(int A[], int low, int high)
 
         
             <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/04/11/data/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">data</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
                 
                 
                     <div class="article-next">
@@ -535,7 +568,7 @@ int Partition(int A[], int low, int high)
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="nav-text">一、插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="nav-text">直接插入排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8A%98%E5%8D%8A%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="nav-text">折半插入排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F"><span class="nav-text">希尔排序</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BA%A4%E6%8D%A2%E6%8E%92%E5%BA%8F"><span class="nav-text">二、交换排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F"><span class="nav-text">冒泡排序</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="nav-text">一、插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="nav-text">直接插入排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8A%98%E5%8D%8A%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="nav-text">折半插入排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F"><span class="nav-text">希尔排序</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BA%A4%E6%8D%A2%E6%8E%92%E5%BA%8F"><span class="nav-text">二、交换排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F"><span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F"><span class="nav-text">快速排序</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F"><span class="nav-text">三、选择排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F"><span class="nav-text">简单选择排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A0%86%E6%8E%92%E5%BA%8F"><span class="nav-text">堆排序</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>
@@ -581,10 +614,22 @@ int Partition(int A[], int low, int high)
 
 
 
-<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
 
 
-    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+    
+<script src="/js/local-search.js"></script>
+
 
 
 
@@ -593,12 +638,20 @@ int Partition(int A[], int low, int high)
 
 <div class="post-scripts pjax">
     
-        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
     
 </div>
 
 
-    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/pjax.min.js"></script>
+    
+<script src="/js/libs/pjax.min.js"></script>
+
 <script>
     window.addEventListener('DOMContentLoaded', () => {
         window.pjax = new Pjax({
