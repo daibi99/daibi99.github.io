@@ -9,7 +9,7 @@
     
     <title>
         
-            Archive: 2022/4 |
+            Task-agnostic Video-Language Model Pre-training for Video Understanding |
         
         daibi&#39;s blog
     </title>
@@ -76,7 +76,7 @@
                         </li>
                     
                         <li class="menu-item">
-                            <a class="active"
+                            <a class=""
                                href="/archives"
                             >
                                 ARCHIVES
@@ -118,7 +118,7 @@
                 </li>
             
                 <li class="drawer-menu-item flex-center">
-                    <a class="active"
+                    <a class=""
                        href="/archives">ARCHIVES</a>
                 </li>
             
@@ -143,66 +143,99 @@
 
                 
                     <div class="fade-in-down-animation">
-    <div class="archive-container ">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Task-agnostic Video-Language Model Pre-training for Video Understanding</span>
+        </div>
+
         
-<div class="archive-list-container">
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/1.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">daibi</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-04-17 09:12:17</span>
+        <span class="mobile">2022-04-17 09:12</span>
+    </span>
     
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2022</span>
-                <span class="archive-year-post-count">[6]</span>
-            </div>
-            <ul class="article-list">
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
                 
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2022/04/17/Task-agnostic%20Video-Language%20Model%20Pre-training%20for%20Video%20Understanding/"
-                        >Task-agnostic Video-Language Model Pre-training for Video Understanding</a>
-                        <span class="article-date">04-17</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2022/04/11/Computer%20Organization%20-%20Chapter%20One/"
-                        >Computer Organization - Chapter One</a>
-                        <span class="article-date">04-11</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2022/04/10/Data%20Structure%20Sort/"
-                        >Data structure - Sort</a>
-                        <span class="article-date">04-10</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2022/04/08/Data%20Structure%20Graph/"
-                        >Data Structure－Graph</a>
-                        <span class="article-date">04-08</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2022/04/07/Finshing%20Master/"
-                        >Fishing Master</a>
-                        <span class="article-date">04-07</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2022/04/07/Adaptive%20Boundary%20Proposal%20Network%20for%20Arbitrary%20Shape%20Text%20Detection/"
-                        >Adaptive Boundary Proposal Network for Arbitrary Shape Text Detection</a>
-                        <span class="article-date">04-07</span>
+                    <li>
+                        <a href="/categories/ICCV-2021/">ICCV 2021</a>&nbsp;
                     </li>
                 
             </ul>
-        </section>
+        </span>
+    
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>393 Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>1 Mins</span>
+        </span>
+    
     
 </div>
 
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>　　本论文源自ICCV 2021，<strong><a class="link"   target="_blank" rel="noopener" href="https://aclanthology.org/2021.findings-acl.370.pdf" >原文链接<i class="fas fa-external-link-alt"></i></a></strong>　　源码：<a class="link"   target="_blank" rel="noopener" href="https://github.com/pytorch/fairseq/tree/main/examples/MMPT" >https://github.com/pytorch/fairseq/tree/main/examples/MMPT<i class="fas fa-external-link-alt"></i></a></p>
+<h4 id="本论文解决的现有问题"><a href="#本论文解决的现有问题" class="headerlink" title="本论文解决的现有问题"></a>本论文解决的现有问题</h4><p>　　现有的预训练是针对特定任务的，通过采用需要两种模态的单一交叉模态编码器，这限制其用于检索式任务，或采用两个单模态编码器进行更复杂的多任务学习，这限制早期交叉模态融合。<br>　　现有的视频和语言预训练是特定于任务的，它们采用（1）需要跨模态推理(例如视频字幕)的任务的单个跨模态编码器，或（2）多个单模态编码器/解码器，来结合需要单独嵌入每个模态的特定任务。相反，本文提出了一种称为视频语言模型（video language model，VLM），证明了任务无关模型的预训练是可能的，该模型可以接受文本、视频或两者作为输入。</p>
+<h4 id="针对上述问题的解决方案"><a href="#针对上述问题的解决方案" class="headerlink" title="针对上述问题的解决方案"></a>针对上述问题的解决方案</h4><p>　　1.提出了一种简单的、任务无关的多模态预训练方法，可以接受视频或文本输入，或同时接受视频或文本输入，用于各种最终的下游任务。<br>　　2.引入了新的预训练mask方案，可以更好地跨模态混合（例如，通过强制文本mask来预测最近的视频嵌入），同时保持可分性（例如，有时只需要单模态预测，而不使用所有输入）。<br>　　3.实验论证上述方案的可行性。</p>
+
+        </div>
+
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/04/11/Computer%20Organization%20-%20Chapter%20One/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Computer Organization - Chapter One</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
     </div>
 </div>
+
 
                 
             </div>
@@ -230,6 +263,23 @@
         </div>
     </div>
 
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
     
 
     <div class="right-bottom-side-tools">
@@ -275,6 +325,14 @@
 
     </div>
 
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%AC%E8%AE%BA%E6%96%87%E8%A7%A3%E5%86%B3%E7%9A%84%E7%8E%B0%E6%9C%89%E9%97%AE%E9%A2%98"><span class="nav-text">本论文解决的现有问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%92%88%E5%AF%B9%E4%B8%8A%E8%BF%B0%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-text">针对上述问题的解决方案</span></a></li></ol>
+    </div>
+</div>
+        </aside>
     
 
     <div class="image-viewer-container">
@@ -340,6 +398,14 @@
 
 
 <div class="post-scripts pjax">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
     
 </div>
 
